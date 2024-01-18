@@ -1,0 +1,52 @@
+{
+	"name": "hcknzs-www2",
+	"private": true,
+	"sideEffects": false,
+	"type": "module",
+	"scripts": {
+		"build": "run-s build:*",
+		"build:remix": "remix build",
+		"dev": "run-p dev:*",
+		"dev:remix": "remix dev --manual",
+		"test": "run-p test:*",
+		"test:lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+		"test:types": "tsc --noEmit",
+		"start": "remix-serve ./build/index.js",
+		"typecheck": "tsc"
+	},
+	"dependencies": {
+		"@fontsource/ibm-plex-mono": "^5.0.8",
+		"@fontsource/ibm-plex-sans": "^5.0.18",
+		"@react-hookz/web": "^24.0.2",
+		"@remix-run/css-bundle": "^2.5.0",
+		"@remix-run/node": "^2.5.0",
+		"@remix-run/react": "^2.5.0",
+		"@remix-run/serve": "^2.5.0",
+		"@tailwindcss/typography": "^0.5.10",
+		"clsx": "^2.1.0",
+		"isbot": "^4.4.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"uberschrift": "^1.1.10"
+	},
+	"devDependencies": {
+		"@remix-run/dev": "^2.5.0",
+		"@remix-run/eslint-config": "^2.5.0",
+		"@types/react": "^18.2.48",
+		"@types/react-dom": "^18.2.18",
+		"autoprefixer": "^10.4.17",
+		"eslint": "^8.56.0",
+		"eslint-config-peerigon": "^37.1.0",
+		"eslint-plugin-canonical": "^4.18.0",
+		"eslint-plugin-jsx-a11y": "^6.8.0",
+		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"npm-run-all": "^4.1.5",
+		"postcss": "^8.4.33",
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5.3.3"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
+}
