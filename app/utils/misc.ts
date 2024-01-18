@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useClientState } from "./use-client-state";
 
 export const isSSR = typeof window === "undefined";
 
@@ -11,4 +11,4 @@ const getPrefersReducedMotion = () => {
 };
 
 export const usePrefersReducedMotion = () =>
-	useMemo(getPrefersReducedMotion, []);
+	useClientState(getPrefersReducedMotion())[0];

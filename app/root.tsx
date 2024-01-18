@@ -12,6 +12,7 @@ import "@fontsource/ibm-plex-mono/400-italic.css";
 import "@fontsource/ibm-plex-mono/700-italic.css";
 import "@fontsource/ibm-plex-mono/700.css";
 import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/ibm-plex-sans/300-italic.css";
 
 import stylesheet from "./tailwind.css";
 
@@ -28,7 +29,7 @@ export const links: LinksFunction = () => {
 
 const App = () => {
 	return (
-		<html lang="en">
+		<html lang="de" className="scroll-smooth">
 			<head>
 				<meta charSet="utf-8" />
 				<meta
