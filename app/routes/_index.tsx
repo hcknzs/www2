@@ -4,7 +4,7 @@ import Intro from "../components/content/intro.mdx";
 import What from "../components/content/what.mdx";
 import Topics from "../components/content/topics.mdx";
 import { Noise } from "../components/noise";
-import { ProseWrapper, Section } from "~/components/misc";
+import { ProseWrapper, Section, SectionInner } from "~/components/misc";
 import { NewsletterSection } from "~/components/newsletter-section";
 
 export const meta: MetaFunction = () => {
@@ -22,51 +22,92 @@ const Index = () => {
 		<main className="">
 			<h1 className="sr-only">hcknzs</h1>
 			<HxBoundary>
-				<Section
-					color="red"
-					className="h-screen flex flex-col items-center justify-center"
-				>
-					<a href="#intro" className="w-64">
-						<img
-							src="/logo.svg"
-							alt="hcknzs"
-							className="m-auto py-12 block"
-						/>
-						<span aria-hidden="true" className="absolute inset-0" />
-					</a>
+				<div className="flex flex-col min-h-screen">
+					<Section
+						color="red"
+						className="flex-1 flex flex-col items-center justify-center"
+					>
+						<a
+							href="#intro"
+							className="w-64"
+							aria-label="Nach unten scrollen"
+						>
+							<img
+								src="/logo.svg"
+								alt="hcknzs"
+								className="m-auto py-12 block"
+							/>
+							<span
+								aria-hidden="true"
+								className="absolute inset-0"
+							/>
+						</a>
 
-					<p className="text-white p-4 cursor font-plex-mono tracking-plex-mono text-2xl text-center">
-						Hackathon gegen Rechts
-						<br />
-						19.—21. Juli 2024
-						<br />@ Schwabencenter Augsburg
-					</p>
-					<Noise className="text-lime" opacity={0.7} busyness={40} />
-				</Section>
-				<Section color="black" id="intro">
-					<p className="font-plex-mono tracking-plex-mono text-2xl text-center">
-						Findest Du nicht auch, 2024 ist ein gutes Jahr, um
-						einfach mal die Schnauze voll zu haben?
-					</p>
-				</Section>
-				<NewsletterSection />
+						<p className="text-white p-4 cursor font-plex-mono tracking-plex-mono text-2xl text-center">
+							Hackathon gegen Rechts
+							<br />
+							19.—21. Juli 2024
+							<br />@ Schwabencenter Augsburg
+						</p>
+						<Noise
+							className="text-lime"
+							opacity={0.7}
+							busyness={40}
+						/>
+					</Section>
+					<Section color="black" id="intro">
+						<p className="font-plex-mono tracking-plex-mono text-2xl text-center cursor">
+							Findest Du nicht auch, 2024 ist ein gutes Jahr, um
+							einfach mal die Schnauze voll zu haben?
+						</p>
+					</Section>
+				</div>
 				<Section color="purple">
 					<ProseWrapper>
 						<Intro />
 					</ProseWrapper>
 				</Section>
+				<NewsletterSection />
 				<Section color="teal">
 					<ProseWrapper>
 						<What />
 						<Noise busyness={7} />
 					</ProseWrapper>
 				</Section>
-				<NewsletterSection />
 				<Section color="black">
 					<ProseWrapper>
 						<Topics />
 					</ProseWrapper>
 				</Section>
+				<NewsletterSection />
+				<footer className="py-8 lg:py-24 flex flex-col bg-red text-black">
+					<SectionInner className="py-6">
+						<a
+							href="#intro"
+							className="inline-block"
+							aria-label="Nach oben scrollen"
+						>
+							<img
+								src="/signet.svg"
+								alt="hcknzs"
+								className="w-auto h-5 align-middle relative top-[0.2em]"
+							/>
+						</a>
+						<span className="font-plex-mono tracking-plex-mono text-lime ml-3 text-2xl">
+							{new Date().getFullYear()}
+						</span>
+					</SectionInner>
+					<ProseWrapper>
+						<a
+							href="https://bluespotsproductions.de/impressum"
+							target="_blank"
+							rel="noreferrer"
+							className="font-plex-mono tracking-plex-mono"
+						>
+							Impressum & Datenschutz
+						</a>
+					</ProseWrapper>
+				</footer>
 			</HxBoundary>
 		</main>
 	);

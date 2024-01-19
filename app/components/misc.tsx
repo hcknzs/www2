@@ -21,7 +21,7 @@ export const Section: React.FC<
 			className={cn(
 				className,
 				themes[color ?? "red"],
-				tw`py-8 lg:py-24 relative`
+				tw`px-8 py-8 lg:py-24 relative`
 			)}
 			{...rest}
 		/>
