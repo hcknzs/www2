@@ -45,7 +45,7 @@ export const Noise: React.FC<{
 			aria-hidden
 			className={cn(
 				className,
-				`font-plex-mono text-5xl absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[0] animate-strobe motion-reduce:animate-none`
+				`font-plex-mono text-md lg:text-3xl absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[0] animate-strobe motion-reduce:animate-none`
 			)}
 		>
 			{noise.map(({ char, id, size, x, y }) => (

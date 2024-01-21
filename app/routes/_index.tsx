@@ -25,7 +25,7 @@ const Index = () => {
 				<div className="flex flex-col min-h-screen">
 					<Section
 						color="red"
-						className="flex-1 flex flex-col items-center justify-center"
+						className="flex-1 flex flex-col gap-8 lg:gap-16 items-center justify-center"
 					>
 						<a
 							href="#intro"
@@ -35,7 +35,7 @@ const Index = () => {
 							<img
 								src="/logo.svg"
 								alt="hcknzs"
-								className="m-auto py-12 block"
+								className="m-auto block"
 							/>
 							<span
 								aria-hidden="true"
@@ -43,9 +43,12 @@ const Index = () => {
 							/>
 						</a>
 
-						<p className="text-white p-4 cursor font-plex-mono tracking-plex-mono text-2xl text-center">
-							Hackathon gegen Rechts
-							<br />
+						<p className="text-white font-plex-mono tracking-plex-mono text-2xl text-center">
+							Hackathon und Ideenfestival
+							<br className="hidden sm:inline" /> für neue
+							Protestformen
+						</p>
+						<p className="text-lime font-plex-mono tracking-plex-mono text-lg text-center">
 							19.—21. Juli 2024
 							<br />@ Schwabencenter Augsburg
 						</p>
