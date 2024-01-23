@@ -48,6 +48,12 @@ const App = () => {
 					<ScrollRestoration />
 					<Scripts />
 					<LiveReload />
+
+					<script
+						data-goatcounter="https://hcknzs.goatcounter.com/count"
+						async
+						src="//gc.zgo.at/count.js"
+					/>
 				</body>
 			</html>
 		</QueryClientProvider>
