@@ -2,17 +2,27 @@ import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 import typography from "@tailwindcss/typography";
 
+const beams = Object.fromEntries(
+	["▒", "#", "░", "/", "▓", "~"].map((p, i) => [
+		`.beam:nth-child(${i}):after`,
+		{
+			content: `"${p}"`,
+		},
+	])
+);
+
 export default {
 	content: ["./app/**/*.{js,jsx,ts,tsx,mdx}"],
 	plugins: [
 		typography,
 		plugin(({ addUtilities }) => {
 			addUtilities({
-				".cursor:after": {
+				".beam:after": {
 					animation: "strobe 1s steps(1) infinite",
 					content: "'░'",
 					fontFamily: "monospaced",
 				},
+				...beams,
 				".debug-border": {
 					border: "1px solid red",
 				},
