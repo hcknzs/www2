@@ -3,6 +3,7 @@ import { HxBoundary } from "uberschrift";
 import Intro from "../components/content/intro.mdx";
 import What from "../components/content/what.mdx";
 import Topics from "../components/content/topics.mdx";
+import Faq from "../components/content/faq.mdx";
 import { Noise } from "../components/noise";
 import { ProseWrapper, Section, SectionInner } from "~/components/misc";
 import { NewsletterSection } from "~/components/newsletter-section";
@@ -93,6 +94,11 @@ const Index = () => {
 					</ProseWrapper>
 				</Section>
 				<NewsletterSection />
+				<Section color="purple">
+					<ProseWrapper className="beam-none">
+						<Faq />
+					</ProseWrapper>
+				</Section>
 				<footer className="py-8 lg:py-24 flex flex-col bg-red text-black">
 					<SectionInner className="py-6">
 						<a
