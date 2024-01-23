@@ -53,7 +53,7 @@ export const NewsletterSection = () => {
 		reset: resetMutation,
 	} = useMutation<ApiReturnType, any, TypeOf<typeof schema>>({
 		mutationFn: async (foo) => {
-			const request = await fetch(`${newsletterUrl}/form.php`, {
+			const request = await fetch(newsletterUrl, {
 				body: JSON.stringify(foo),
 				headers: {
 					Authorization: "Bearer " + newsletterKey,
