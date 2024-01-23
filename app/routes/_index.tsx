@@ -6,6 +6,16 @@ import Topics from "../components/content/topics.mdx";
 import { Noise } from "../components/noise";
 import { ProseWrapper, Section, SectionInner } from "~/components/misc";
 import { NewsletterSection } from "~/components/newsletter-section";
+import { env } from "~/env";
+
+export const loader = async () => {
+	const newsletterUrl = env.NEWSLETTER_API_URL;
+	const newsletterKey = env.NEWSLETTER_API_KEY;
+
+	return { newsletterKey, newsletterUrl };
+};
+
+export type LoaderData = ReturnType<typeof loader>;
 
 export const meta: MetaFunction = () => {
 	return [

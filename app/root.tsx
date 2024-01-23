@@ -14,6 +14,7 @@ import "@fontsource/ibm-plex-mono/700.css";
 import "@fontsource/ibm-plex-sans/300.css";
 import "@fontsource/ibm-plex-sans/300-italic.css";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import stylesheet from "./tailwind.css";
 
 export const links: LinksFunction = () => {
@@ -27,25 +28,29 @@ export const links: LinksFunction = () => {
 	];
 };
 
+const queryClient = new QueryClient();
+
 const App = () => {
 	return (
-		<html lang="de" className="scroll-smooth">
-			<head>
-				<meta charSet="utf-8" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1"
-				/>
-				<Meta />
-				<Links />
-			</head>
-			<body className="font-plex">
-				<Outlet />
-				<ScrollRestoration />
-				<Scripts />
-				<LiveReload />
-			</body>
-		</html>
+		<QueryClientProvider client={queryClient}>
+			<html lang="de" className="scroll-smooth">
+				<head>
+					<meta charSet="utf-8" />
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1"
+					/>
+					<Meta />
+					<Links />
+				</head>
+				<body className="font-plex">
+					<Outlet />
+					<ScrollRestoration />
+					<Scripts />
+					<LiveReload />
+				</body>
+			</html>
+		</QueryClientProvider>
 	);
 };
 
