@@ -62,8 +62,7 @@ const Index = () => {
 							Protestformen
 						</p>
 						<p className="text-lime font-plex-mono tracking-plex-mono text-md text-center">
-							19.—21. Juli 2024
-							<br />@ Schwabencenter Augsburg
+							Augsburg, 19.—21. Juli 2024
 						</p>
 						<Noise
 							className="text-lime"
