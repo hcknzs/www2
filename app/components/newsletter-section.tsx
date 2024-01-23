@@ -1,26 +1,21 @@
 import { Hx } from "uberschrift";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { TypeOf, z } from "zod";
-import { useForm } from "react-hook-form";
-import { useLoaderData } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import { Section } from "./misc";
+import type { ActionData } from "~/routes/_index";
 import { cn, tw } from "~/utils/tailwind";
-import { env } from "~/env";
-import type { LoaderData } from "~/routes/_index";
-
-const schema = z.object({ email: z.string().email() });
-
-type ApiReturnType = unknown;
 
 const SubmitButton: React.FC<{
-	isLoading: boolean;
-	isSuccess: boolean;
-	onReset: () => void;
+	isLoading?: boolean;
+	isSuccess?: boolean;
+	onReset?: () => void;
 }> = ({ isLoading, isSuccess, onReset }) => {
-	const label = isSuccess ? "Gesendet! Nochmal?" : "Absenden";
+	const label = isSuccess
+		? "Gesendet! Nochmal?"
+		: isLoading
+		? "…"
+		: "Absenden";
 	const className = cn(
-		tw`h-12 border border-purple-400 rounded-full px-5 py-1 bg-purple-400 text-white font-plex-mono tracking-plex-mono hover:bg-purple-500 transition-colors"`
+		tw`sm:min-w-[10rem] h-12 border border-purple-400 rounded-full px-5 py-1 bg-purple-400 text-white font-plex-mono tracking-plex-mono hover:bg-purple-500 transition-colors"`
 	);
 
 	return (
@@ -36,44 +31,8 @@ const SubmitButton: React.FC<{
 };
 
 export const NewsletterSection = () => {
-	const { newsletterKey, newsletterUrl } = useLoaderData<LoaderData>();
-
-	const {
-		register,
-		handleSubmit,
-		reset: resetForm,
-	} = useForm({
-		resolver: zodResolver(schema),
-	});
-
-	const {
-		isPending,
-		isSuccess,
-		mutate,
-		reset: resetMutation,
-	} = useMutation<ApiReturnType, any, TypeOf<typeof schema>>({
-		mutationFn: async (foo) => {
-			const request = await fetch(newsletterUrl, {
-				body: JSON.stringify(foo),
-				headers: {
-					Authorization: "Bearer " + newsletterKey,
-					"Content-Type": "application/json",
-				},
-				method: "POST",
-			});
-
-			if (request.ok) {
-				return request.json();
-			}
-
-			throw new Error("Something went wrong");
-		},
-	});
-
-	const reset = () => {
-		resetForm();
-		resetMutation();
-	};
+	const { Form, state, data } = useFetcher<{ error: string | null }>();
+	const isLoading = state === "submitting";
 
 	return (
 		<Section color="lime" className="text-purple-400">
@@ -85,8 +44,9 @@ export const NewsletterSection = () => {
 						dir!
 					</p>
 				</div>
-				<form
-					onSubmit={handleSubmit((v) => mutate(v as any))}
+				<Form
+					method="post"
+					action="/?index"
 					className="flex flex-col gap-4 sm:flex-row sm:gap-0 lg:pt-3"
 				>
 					<label htmlFor="email" className="sr-only">
@@ -94,7 +54,8 @@ export const NewsletterSection = () => {
 					</label>
 					<input
 						type="email"
-						{...register("email")}
+						name="email"
+						id="email"
 						className="h-12 border-2 border-purple-400 rounded-full px-3 py-2"
 						placeholder="mail@example.com"
 					/>
@@ -109,12 +70,8 @@ export const NewsletterSection = () => {
 							d="m21.883 12-7.527 6.235L15 19l9-7.521L15 4l-.645.764L21.884 11H0v1h21.883z"
 						/>
 					</svg>
-					<SubmitButton
-						onReset={reset}
-						isLoading={isPending}
-						isSuccess={isSuccess}
-					/>
-				</form>
+					<SubmitButton isSuccess={isSuccess} isLoading={isLoading} />
+				</Form>
 			</div>
 			<p className="mt-8 text-center sm:text-left lg:text-center">
 				<a
