@@ -20,9 +20,11 @@ export type LoaderData = ReturnType<typeof loader>;
 
 export const meta: MetaFunction = () => {
 	return [
-		{ title: "hcknzs — Hackathon und Ideenfestival gegen Rechts" },
 		{
-			content: "Hackathon und Ideenfestival gegen Rechts",
+			title: "hcknzs — Hackathon und Ideenfestival für neue Protestformen",
+		},
+		{
+			content: "Hackathon und Ideenfestival für neue Protestformen",
 			name: "description",
 		},
 	];
