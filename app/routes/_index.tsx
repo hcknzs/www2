@@ -29,7 +29,7 @@ const Index = () => {
 					>
 						<a
 							href="#intro"
-							className="w-64"
+							className="w-56"
 							aria-label="Nach unten scrollen"
 						>
 							<img
@@ -43,12 +43,12 @@ const Index = () => {
 							/>
 						</a>
 
-						<p className="text-white font-plex-mono tracking-plex-mono text-2xl text-center">
+						<p className="text-white font-plex-mono tracking-plex-mono text-xl text-center">
 							Hackathon und Ideenfestival
 							<br className="hidden sm:inline" /> für neue
 							Protestformen
 						</p>
-						<p className="text-lime font-plex-mono tracking-plex-mono text-lg text-center">
+						<p className="text-lime font-plex-mono tracking-plex-mono text-md text-center">
 							19.—21. Juli 2024
 							<br />@ Schwabencenter Augsburg
 						</p>
@@ -59,7 +59,7 @@ const Index = () => {
 						/>
 					</Section>
 					<Section color="black" id="intro">
-						<p className="font-plex-mono tracking-plex-mono text-2xl text-center cursor">
+						<p className="font-plex-mono tracking-plex-mono text-xl text-center cursor">
 							Findest Du nicht auch, 2024 ist ein gutes Jahr, um
 							einfach mal die Schnauze voll zu haben?
 						</p>
