@@ -1,5 +1,7 @@
+import invariant from "tiny-invariant";
 import { MetaFunction } from "@remix-run/react";
 import { HxBoundary } from "uberschrift";
+import { ActionFunction, json } from "@remix-run/node";
 import Intro from "../components/content/intro.mdx";
 import What from "../components/content/what.mdx";
 import Topics from "../components/content/topics.mdx";
@@ -8,15 +10,6 @@ import { Noise } from "../components/noise";
 import { ProseWrapper, Section, SectionInner } from "~/components/misc";
 import { NewsletterSection } from "~/components/newsletter-section";
 import { env } from "~/env";
-
-export const loader = async () => {
-	const newsletterUrl = env.NEWSLETTER_API_URL;
-	const newsletterKey = env.NEWSLETTER_API_KEY;
-
-	return { newsletterKey, newsletterUrl };
-};
-
-export type LoaderData = ReturnType<typeof loader>;
 
 export const meta: MetaFunction = () => {
 	return [
@@ -134,3 +127,40 @@ const Index = () => {
 };
 
 export default Index;
+
+export const action: ActionFunction = async ({ request }) => {
+	try {
+		const newsletterUrl = env.NEWSLETTER_API_URL;
+		const newsletterKey = env.NEWSLETTER_API_KEY;
+
+		invariant(newsletterKey, "No newsletter key provided");
+		invariant(newsletterUrl, "No newsletter URL provided");
+
+		const formData = await request.formData();
+		const email = formData.get("email");
+
+		invariant(email, "No email provided");
+
+		const response = await fetch(newsletterUrl, {
+			body: JSON.stringify({
+				email,
+			}),
+			headers: {
+				Authorization: `Bearer ${newsletterKey}`,
+			},
+			method: "POST",
+		});
+
+		if (!response.ok) {
+			throw new Error(
+				`Something went wrong on the other end: ${await response.json()}`
+			);
+		}
+
+		return json({ error: null, isSuccess: true });
+	} catch (error) {
+		return json({ error, isSuccess: false });
+	}
+};
+
+export type ActionData = { error: string | null; isSuccess: boolean };
