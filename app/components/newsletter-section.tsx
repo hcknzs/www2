@@ -1,38 +1,39 @@
 import { Hx } from "uberschrift";
 import { useFetcher } from "@remix-run/react";
 import { Section } from "./misc";
-import type { ActionData } from "~/routes/_index";
 import { cn, tw } from "~/utils/tailwind";
+import { ActionData } from "~/routes/_index";
 
 const SubmitButton: React.FC<{
 	isLoading?: boolean;
-	isSuccess?: boolean;
 	onReset?: () => void;
-}> = ({ isLoading, isSuccess, onReset }) => {
-	const label = isSuccess
-		? "Gesendet! Nochmal?"
-		: isLoading
-		? "…"
-		: "Absenden";
+}> = ({ isLoading, onReset }) => {
+	const label = isLoading ? "…" : "Absenden";
 	const className = cn(
 		tw`sm:min-w-[10rem] h-12 border border-purple-400 rounded-full px-5 py-1 bg-purple-400 text-white font-plex-mono tracking-plex-mono hover:bg-purple-500 transition-colors"`
 	);
 
 	return (
-		<button
-			type={isSuccess ? "button" : "submit"}
-			className={className}
-			disabled={isLoading}
-			onClick={isSuccess ? onReset : undefined}
-		>
+		<button type="submit" className={className} disabled={isLoading}>
 			{label}
 		</button>
 	);
 };
 
 export const NewsletterSection = () => {
-	const { Form, state, data } = useFetcher<{ error: string | null }>();
+	const { Form, state, data } = useFetcher<ActionData>();
 	const isLoading = state === "submitting";
+	const isSuccess = data?.isSuccess;
+
+	if (isSuccess) {
+		return (
+			<Section color="lime" className="text-purple-400">
+				<div className="text-center font-plex-mono tracking-plex-mono">
+					<p className="text-4xl">Danke!</p>
+				</div>
+			</Section>
+		);
+	}
 
 	return (
 		<Section color="lime" className="text-purple-400">
@@ -45,7 +46,7 @@ export const NewsletterSection = () => {
 					</p>
 				</div>
 				<Form
-					method="post"
+					method="POST"
 					action="/?index"
 					className="flex flex-col gap-4 sm:flex-row sm:gap-0 lg:pt-3"
 				>
@@ -70,7 +71,7 @@ export const NewsletterSection = () => {
 							d="m21.883 12-7.527 6.235L15 19l9-7.521L15 4l-.645.764L21.884 11H0v1h21.883z"
 						/>
 					</svg>
-					<SubmitButton isSuccess={isSuccess} isLoading={isLoading} />
+					<SubmitButton isLoading={isLoading} />
 				</Form>
 			</div>
 			<p className="mt-8 text-center sm:text-left lg:text-center">

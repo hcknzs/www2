@@ -1,7 +1,7 @@
 import invariant from "tiny-invariant";
 import { MetaFunction } from "@remix-run/react";
 import { HxBoundary } from "uberschrift";
-import { ActionFunctionArgs, json } from "@remix-run/node";
+import { ActionFunction, json } from "@remix-run/node";
 import Intro from "../components/content/intro.mdx";
 import What from "../components/content/what.mdx";
 import Topics from "../components/content/topics.mdx";
@@ -127,11 +127,7 @@ const Index = () => {
 
 export default Index;
 
-export const action = async ({
-	request,
-	context,
-	params,
-}: ActionFunctionArgs) => {
+export const action: ActionFunction = async ({ request }) => {
 	try {
 		const newsletterUrl = env.NEWSLETTER_API_URL;
 		const newsletterKey = env.NEWSLETTER_API_KEY;
@@ -160,8 +156,10 @@ export const action = async ({
 			);
 		}
 
-		return json({ error: null });
+		return json({ error: null, isSuccess: true });
 	} catch (error) {
-		return json({ error });
+		return json({ error, isSuccess: false });
 	}
 };
+
+export type ActionData = { error: string | null; isSuccess: boolean };
