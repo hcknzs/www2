@@ -88,7 +88,7 @@ const Index = () => {
 					</ProseWrapper>
 				</Section>
 				<NewsletterSection />
-				<Section color="purple">
+				<Section anchor="faq" color="purple">
 					<ProseWrapper className="beam-none">
 						<Faq />
 					</ProseWrapper>
