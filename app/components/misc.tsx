@@ -5,9 +5,10 @@ import { cn, tw } from "~/utils/tailwind";
 
 export const Section: React.FC<
 	HTMLProps<HTMLDivElement> & {
+		anchor?: string;
 		color?: "red" | "teal" | "purple" | "black" | "lime";
 	}
-> = ({ color, className, ...rest }) => {
+> = ({ color, className, children, anchor, ...rest }) => {
 	const themes = {
 		black: tw`bg-black text-white`,
 		lime: tw`bg-lime text-black`,
@@ -18,13 +19,21 @@ export const Section: React.FC<
 
 	return (
 		<section
-			className={cn(
-				className,
-				themes[color ?? "red"],
-				tw`px-8 py-8 lg:py-24 relative`
-			)}
+			id={anchor}
+			className={cn(className, themes[color ?? "red"], tw`relative p-8`)}
 			{...rest}
-		/>
+		>
+			{anchor && (
+				<a
+					className="xl:sticky left-4 top-4 emoji-white"
+					aria-label="Direktlink zu diesem Abschnitt"
+					href={`#${anchor}`}
+				>
+					⚓
+				</a>
+			)}
+			<div className="lg:py-16">{children}</div>
+		</section>
 	);
 };
 
