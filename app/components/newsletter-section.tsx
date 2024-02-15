@@ -3,14 +3,16 @@ import { useFetcher } from "@remix-run/react";
 import { Section } from "./misc";
 import { cn, tw } from "~/utils/tailwind";
 import { ActionData } from "~/routes/_index";
+import { usePipedString, useString } from "~/i18n";
 
 const SubmitButton: React.FC<{
 	isLoading?: boolean;
 	onReset?: () => void;
-}> = ({ isLoading, onReset }) => {
-	const label = isLoading ? "…" : "Absenden";
+}> = ({ isLoading }) => {
+	const t = useString();
+	const label = isLoading ? "…" : t("send");
 	const className = cn(
-		tw`sm:min-w-[10rem] h-12 border border-purple-400 rounded-full px-5 py-1 bg-purple-400 text-white font-plex-mono tracking-plex-mono hover:bg-purple-500 transition-colors"`
+		tw`sm:min-w-[10rem] h-12 border border-purple-400 rounded-full px-5 py-1 bg-purple-400 text-white font-plex-mono tracking-plex-mono hover:bg-purple-500 transition-colors"`,
 	);
 
 	return (
@@ -21,6 +23,7 @@ const SubmitButton: React.FC<{
 };
 
 export const NewsletterSection = () => {
+	const p = usePipedString();
 	const { Form, state, data } = useFetcher<ActionData>();
 	const isLoading = state === "submitting";
 	const isSuccess = data?.isSuccess;
@@ -39,11 +42,10 @@ export const NewsletterSection = () => {
 		<Section color="lime" className="text-purple-400">
 			<div className="max-w-screen-2xl m-auto flex flex-col gap-8 lg:flex-row justify-center items-middle">
 				<div className="lg:text-right font-plex-mono tracking-plex-mono">
-					<Hx className="font-bold italic text-3xl">Interesse?</Hx>
-					<p className="">
-						Lass&apos; uns deine E-Mail da und wir melden uns bei
-						dir!
-					</p>
+					<Hx className="font-bold italic text-3xl">
+						{p("newsletter.title")}
+					</Hx>
+					<p className="">{p("newsletter.subline")}</p>
 				</div>
 				<Form
 					method="POST"
@@ -81,7 +83,7 @@ export const NewsletterSection = () => {
 					target="_blank"
 					rel="noreferrer"
 				>
-					Oder folge uns auf{" "}
+					{p("newsletter.follow")}{" "}
 					<img
 						className="w-6 h-6 inline"
 						src="insta.svg"

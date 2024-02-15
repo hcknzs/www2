@@ -6,9 +6,10 @@ import { cn, tw } from "~/utils/tailwind";
 export const Section: React.FC<
 	HTMLProps<HTMLDivElement> & {
 		anchor?: string;
+		innerClassName?: string;
 		color?: "red" | "teal" | "purple" | "black" | "lime";
 	}
-> = ({ color, className, children, anchor, ...rest }) => {
+> = ({ color, className, innerClassName, children, anchor, ...rest }) => {
 	const themes = {
 		black: tw`bg-black text-white`,
 		lime: tw`bg-lime text-black`,
@@ -32,7 +33,7 @@ export const Section: React.FC<
 					⚓
 				</a>
 			)}
-			<div className="lg:py-16">{children}</div>
+			<div className={cn(innerClassName, "lg:py-16")}>{children}</div>
 		</section>
 	);
 };

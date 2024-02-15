@@ -8,7 +8,7 @@ const beams = Object.fromEntries(
 		{
 			content: `"${p}"`,
 		},
-	])
+	]),
 );
 
 export default {
