@@ -18,7 +18,9 @@ const getSimpleLayoutComponent =
 	): SLC =>
 	// eslint-disable-next-line react/display-name
 	({ children, className }) => (
-		<As className={cn(baseClassName, className)}>{children ?? baseChildren}</As>
+		<As className={cn(baseClassName, className)}>
+			{children ?? baseChildren}
+		</As>
 	);
 
 // … and here's a shorthand for it.

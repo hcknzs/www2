@@ -10,6 +10,7 @@ import { Noise } from "../components/noise";
 import { ProseWrapper, Section, SectionInner } from "~/components/misc";
 import { NewsletterSection } from "~/components/newsletter-section";
 import { env } from "~/env";
+import { IntroSection } from "~/components/intro-section";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -29,42 +30,9 @@ const Index = () => {
 			<h1 className="sr-only">hcknzs</h1>
 			<HxBoundary>
 				<div className="flex flex-col min-h-screen">
-					<Section
-						color="red"
-						className="flex-1 flex flex-col gap-8 lg:gap-16 items-center justify-center"
-					>
-						<a
-							href="#intro"
-							className="w-56"
-							aria-label="Nach unten scrollen"
-						>
-							<img
-								src="/logo.svg"
-								alt="hcknzs"
-								className="m-auto block"
-							/>
-							<span
-								aria-hidden="true"
-								className="absolute inset-0"
-							/>
-						</a>
-
-						<p className="text-white font-plex-mono tracking-plex-mono text-xl text-center">
-							Hackathon und Ideenfestival
-							<br className="hidden sm:inline" /> für neue
-							Protestformen
-						</p>
-						<p className="text-lime font-plex-mono tracking-plex-mono text-md text-center">
-							Augsburg, 19.—21. Juli 2024
-						</p>
-						<Noise
-							className="text-lime"
-							opacity={0.7}
-							busyness={40}
-						/>
-					</Section>
+					<IntroSection />
 					<Section color="black" id="intro">
-						<p className="font-plex-mono tracking-plex-mono text-xl text-center cursor">
+						<p className="font-plex-mono tracking-plex-mono text-md lg:text-xl text-center cursor">
 							Findest Du nicht auch, 2024 ist ein gutes Jahr, um
 							einfach mal die Schnauze voll zu haben?
 						</p>
@@ -153,7 +121,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 		if (!response.ok) {
 			throw new Error(
-				`Something went wrong on the other end: ${await response.json()}`
+				`Something went wrong on the other end: ${await response.json()}`,
 			);
 		}
 
