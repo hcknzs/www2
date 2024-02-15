@@ -1,7 +1,24 @@
+import { Link } from "@remix-run/react";
 import { Section } from "./misc";
 import { Noise } from "./noise";
 import { tw } from "~/utils/tailwind";
-import { usePipedString, useString } from "~/i18n";
+import { useLocale, usePipedString, useString } from "~/i18n";
+
+const LocaleSwitcher = () => {
+	const locale = useLocale();
+	const t = useString();
+	const to = locale === "de" ? "/en" : "/";
+	const otherLocale = locale === "de" ? "EN" : "DE";
+
+	return (
+		<div className="font-plex-mono font-bold flex gap-4 absolute top-4 right-4">
+			<span className="sr-only">{t("switch-language")}</span>
+			<Link className="text-white" to={to}>
+				{otherLocale}
+			</Link>
+		</div>
+	);
+};
 
 export const IntroSection = () => {
 	const t = useString();
@@ -29,6 +46,8 @@ export const IntroSection = () => {
 				{p("date-location")}
 			</p>
 			<Noise className="text-lime" opacity={0.7} busyness={40} />
+
+			<LocaleSwitcher />
 		</Section>
 	);
 };

@@ -17,6 +17,7 @@ const de = {
 	"scroll-to-bottom": "Nach unten scrollen",
 	send: "Absenden",
 	subline: "Hackathon und Ideenfestival|für neue Protestformen",
+	"switch-language": "Switch language",
 } as const;
 
 const en = {
@@ -27,12 +28,13 @@ const en = {
 	"scroll-to-bottom": "Scroll to bottom",
 	send: "Send",
 	subline: "Hackathon and ideas festival|for new forms of protest",
+	"switch-language": "Sprache wechseln",
 } as const;
 
 const locales = ["de", "en"] as const;
 type Locale = (typeof locales)[number];
 
-export const StringContext = createContext<Locale | undefined>("de");
+export const StringContext = createContext<Locale>("de");
 
 export const StringProvider: React.FC<{
 	locale: Locale;
@@ -41,14 +43,7 @@ export const StringProvider: React.FC<{
 	return createElement(StringContext.Provider, { value: locale }, children);
 };
 
-export const useLocale = () => {
-	const ctx = useContext(StringContext);
-
-	if (!ctx) {
-		throw new Error("No locale set");
-	}
-	return ctx;
-};
+export const useLocale = () => useContext(StringContext);
 
 export const replacePipeWithBr = (str?: string) => {
 	if (!str) {
