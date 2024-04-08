@@ -8,7 +8,7 @@ export const env = createEnv({
 	runtimeEnv: process.env,
 
 	server: {
-		NEWSLETTER_API_KEY: z.string().min(1),
-		NEWSLETTER_API_URL: z.string().url(),
+		BREVO_API_KEY: z.string().min(1),
+		BREVO_API_URL: z.string().url(),
 	},
 });
