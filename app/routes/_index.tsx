@@ -98,11 +98,11 @@ export default Index;
 
 export const action: ActionFunction = async ({ request }) => {
 	try {
-		const newsletterUrl = env.NEWSLETTER_API_URL;
-		const newsletterKey = env.NEWSLETTER_API_KEY;
+		const newsletterUrl = env.BREVO_API_URL;
+		const newsletterKey = env.BREVO_API_KEY;
 
-		invariant(newsletterKey, "No newsletter key provided");
-		invariant(newsletterUrl, "No newsletter URL provided");
+		invariant(newsletterKey, "No Brevo key provided");
+		invariant(newsletterUrl, "No Brevo URL provided");
 
 		const formData = await request.formData();
 		const email = formData.get("email");
@@ -112,22 +112,39 @@ export const action: ActionFunction = async ({ request }) => {
 		const response = await fetch(newsletterUrl, {
 			body: JSON.stringify({
 				email,
+				includeListIds: [5],
+				redirectionUrl: "https://www.hcknzs.com/subscribed",
+				templateId: 1,
 			}),
 			headers: {
-				Authorization: `Bearer ${newsletterKey}`,
+				accept: "application/json",
+				"api-key": newsletterKey,
+				"content-type": "application/json",
 			},
 			method: "POST",
 		});
 
+		const result = await response.json();
+
 		if (!response.ok) {
 			throw new Error(
-				`Something went wrong on the other end: ${await response.json()}`,
+				`Something went wrong on the other end: ${JSON.stringify(result, null, 2)}`,
 			);
 		}
 
 		return json({ error: null, isSuccess: true });
 	} catch (error) {
-		return json({ error, isSuccess: false });
+		if (!(error instanceof Error)) {
+			throw new Error("Unknown error");
+		}
+
+		return json(
+			{
+				error: error.message,
+				isSuccess: false,
+			},
+			{ status: 400 },
+		);
 	}
 };
 

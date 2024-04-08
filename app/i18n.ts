@@ -12,7 +12,7 @@ const de = {
 	"date-location": "Augsburg, 19.—21. Juli 2024",
 	"newsletter.follow": "Oder folge uns auf",
 	"newsletter.subline":
-		"Lass&apos; uns deine E-Mail da und wir melden uns bei dir!",
+		"Lass' uns deine E-Mail da und wir melden uns bei dir!",
 	"newsletter.title": "Interesse?",
 	"scroll-to-bottom": "Nach unten scrollen",
 	send: "Absenden",
