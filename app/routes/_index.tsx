@@ -71,7 +71,7 @@ const Index = () => {
 							<img
 								src="/signet.svg"
 								alt="hcknzs"
-								className="w-auto h-5 align-middle relative top-[0.2em]"
+								className="w-auto h-6 align-middle relative top-[0.3em]"
 							/>
 						</a>
 						<span className="font-plex-mono tracking-plex-mono text-lime ml-3 text-2xl">
