@@ -11,6 +11,7 @@ import { ProseWrapper, Section, SectionInner } from "~/components/misc";
 import { NewsletterSection } from "~/components/newsletter-section";
 import { env } from "~/env";
 import { IntroSection } from "~/components/intro-section";
+import { FundingSection } from "~/components/funding-section";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -43,6 +44,7 @@ const Index = () => {
 						<Intro />
 					</ProseWrapper>
 				</Section>
+				<FundingSection />
 				<NewsletterSection />
 				<Section color="teal">
 					<ProseWrapper>
@@ -89,6 +91,7 @@ const Index = () => {
 						</a>
 					</ProseWrapper>
 				</footer>
+				<FundingSection />
 			</HxBoundary>
 		</main>
 	);

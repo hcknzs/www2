@@ -3,21 +3,22 @@ import { prose } from "~/styles";
 import { slc } from "~/utils/components";
 import { cn, tw } from "~/utils/tailwind";
 
+const themes = {
+	black: tw`bg-black text-white`,
+	lime: tw`bg-lime text-black`,
+	purple: tw`bg-purple-400 text-black`,
+	red: tw`bg-red text-black`,
+	teal: tw`bg-teal-300 text-white`,
+	white: tw`bg-white text-black`,
+} as const;
+
 export const Section: React.FC<
 	HTMLProps<HTMLDivElement> & {
 		anchor?: string;
 		innerClassName?: string;
-		color?: "red" | "teal" | "purple" | "black" | "lime";
+		color?: keyof typeof themes;
 	}
 > = ({ color, className, innerClassName, children, anchor, ...rest }) => {
-	const themes = {
-		black: tw`bg-black text-white`,
-		lime: tw`bg-lime text-black`,
-		purple: tw`bg-purple-400 text-black`,
-		red: tw`bg-red text-black`,
-		teal: tw`bg-teal-300 text-white`,
-	};
-
 	return (
 		<section
 			id={anchor}
