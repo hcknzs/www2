@@ -6,7 +6,7 @@ import { cn, tw } from "~/utils/tailwind";
 
 const themes = {
 	black: tw`bg-black text-white`,
-	disrupt: tw`bg-black text-white font-plex-mono tracking-plex-mono text-md lg:text-xl text-center`,
+	disrupt: tw`text-md bg-black text-center font-plex-mono tracking-plex-mono text-white lg:text-xl`,
 	lime: tw`bg-lime text-black`,
 	purple: tw`bg-purple-400 text-black`,
 	red: tw`bg-red text-black`,
@@ -40,7 +40,7 @@ export const Section: React.FC<
 		>
 			{anchor && (
 				<a
-					className="xl:sticky left-4 top-4 emoji-white"
+					className="left-4 top-4 emoji-white xl:sticky"
 					aria-label={t("anchor")}
 					href={`#${anchor}`}
 				>
@@ -56,7 +56,7 @@ export const Section: React.FC<
 };
 
 const makeSectionInner = (classNames?: string) =>
-	slc("div", cn(tw`max-w-screen-md m-auto`, classNames));
+	slc("div", cn(tw`m-auto max-w-screen-md`, classNames));
 
 export const SectionInner = makeSectionInner();
 export const ProseWrapper = makeSectionInner(cn(prose, "text-white"));

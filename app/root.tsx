@@ -9,11 +9,13 @@ import {
 	ScrollRestoration,
 	useLoaderData,
 } from "@remix-run/react";
+
 import "@fontsource/ibm-plex-mono/400-italic.css";
-import "@fontsource/ibm-plex-mono/700-italic.css";
-import "@fontsource/ibm-plex-mono/700.css";
+import "@fontsource/ibm-plex-mono/600-italic.css";
+import "@fontsource/ibm-plex-mono/600.css";
 import "@fontsource/ibm-plex-sans/300.css";
 import "@fontsource/ibm-plex-sans/300-italic.css";
+
 import { renderMetaTags } from "react-datocms";
 import stylesheet from "./tailwind.css";
 import { fetchFromCms } from "./utils/cms";

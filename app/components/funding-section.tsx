@@ -7,7 +7,7 @@ export const FundingSection = () => {
 
 	return (
 		<Section theme="white">
-			<div className="max-w-screen-sm m-auto">
+			<div className="m-auto max-w-screen-sm">
 				<Hx className="sr-only">{t("funding.title")}</Hx>
 				<a
 					href="https://www.demokratie-leben.de/"

@@ -12,7 +12,7 @@ const SubmitButton: React.FC<{
 	const t = useString();
 	const label = isLoading ? "…" : t("send");
 	const className = cn(
-		tw`sm:min-w-[10rem] h-12 border border-purple-400 rounded-full px-5 py-1 bg-purple-400 text-white font-plex-mono tracking-plex-mono hover:bg-purple-500 transition-colors"`,
+		tw`transition-colors" h-12 rounded-full border border-purple-400 bg-purple-400 px-5 py-1 font-plex-mono tracking-plex-mono text-white hover:bg-purple-500 sm:min-w-[10rem]`,
 	);
 
 	return (
@@ -50,9 +50,9 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 
 	return (
 		<Section theme="lime" className="text-purple-400">
-			<div className="max-w-screen-2xl m-auto flex flex-col gap-8 lg:flex-row justify-center items-middle">
-				<div className="lg:text-right font-plex-mono tracking-plex-mono">
-					<Hx className="font-bold italic text-3xl">{title}</Hx>
+			<div className="items-middle m-auto flex max-w-screen-2xl flex-col justify-center gap-8 lg:flex-row">
+				<div className="font-plex-mono tracking-plex-mono lg:text-right">
+					<Hx className="text-3xl font-bold italic">{title}</Hx>
 					<p>{subline}</p>
 				</div>
 				<Form
@@ -67,14 +67,14 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 						type="email"
 						name="email"
 						id="email"
-						className="h-12 border-2 border-purple-400 rounded-full px-3 py-2"
+						className="h-12 rounded-full border-2 border-purple-400 px-3 py-2"
 						placeholder="mail@example.com"
 					/>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						aria-hidden="true"
 						viewBox="0 0 24 24"
-						className="w-6 h-6 rotate-90 sm:rotate-0 self-center mx-3"
+						className="mx-3 h-6 w-6 rotate-90 self-center sm:rotate-0"
 					>
 						<path
 							stroke="currentColor"
@@ -86,14 +86,14 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 			</div>
 			<p className="mt-8 text-center sm:text-left lg:text-center">
 				<a
-					className="block leading-none font-plex-mono tracking-plex-mono underline"
+					className="block font-plex-mono leading-none tracking-plex-mono underline"
 					href="https://instagram.com/hck.nzs"
 					target="_blank"
 					rel="noreferrer"
 				>
 					{instagramLinkText}{" "}
 					<img
-						className="w-6 h-6 inline"
+						className="inline h-6 w-6"
 						src="/insta.svg"
 						alt="Instagram logo"
 					/>{" "}

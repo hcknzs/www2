@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 import type { ReactNode } from "react";
 import { Section } from "./section";
 import { Noise } from "./noise";
-import { tw } from "~/utils/tailwind";
+import { cn, tw } from "~/utils/tailwind";
 import { useLocale, useString } from "~/i18n";
 
 const LocaleSwitcher = () => {
@@ -12,7 +12,7 @@ const LocaleSwitcher = () => {
 	const otherLocale = locale === "de" ? "EN" : "DE";
 
 	return (
-		<div className="font-plex-mono font-bold flex gap-4 absolute top-4 right-4">
+		<div className="absolute right-4 top-4 flex gap-4 font-plex-mono font-bold">
 			<span className="sr-only">{t("switch-language")}</span>
 			<Link className="text-white" to={to}>
 				{otherLocale}
@@ -26,6 +26,8 @@ type IntroSectionProps = {
 	dateLocation: ReactNode;
 };
 
+const p = tw`font-plex-mono text-lg leading-snug tracking-plex-mono text-black lg:text-2xl lg:leading-snug`;
+
 export const IntroSection: React.FC<IntroSectionProps> = ({
 	dateLocation,
 	subline,
@@ -34,26 +36,30 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
 
 	return (
 		<Section
-			theme="red"
-			className={tw`flex-1 flex min-h-[90vh]`}
-			innerClassName={tw`mt-0 mb-0 w-full flex flex-col gap-8 lg:gap-16 items-center justify-center`}
+			theme="lime"
+			className={tw`flex min-h-[90vh] flex-1`}
+			innerClassName={tw`mb-0 mt-0 flex w-full flex-col items-center justify-center gap-[10vh]`}
 		>
 			<a
 				href="#intro"
-				className="w-32 lg:w-52"
+				className="w-32 md:w-52"
 				aria-label={t("scroll-to-bottom")}
 			>
-				<img src="/logo.svg" alt="hcknzs" className="m-auto block" />
+				<img
+					src="/logo.svg"
+					alt="hcknzs"
+					className="relative left-[7%] m-auto block"
+				/>
 				<span aria-hidden="true" className="absolute inset-0" />
 			</a>
 
-			<p className="text-white font-plex-mono tracking-plex-mono text-sm lg:text-xl text-center">
-				{subline}
-			</p>
-			<p className="text-lime font-plex-mono tracking-plex-mono text-sm lg:text-md text-center">
-				{dateLocation}
-			</p>
-			<Noise className="text-lime" opacity={0.7} busyness={40} />
+			<div>
+				<p className={cn(p)}>{subline}</p>
+				<p className={cn(p, tw`text-purple underline`)}>
+					{dateLocation}
+				</p>
+			</div>
+			<Noise className="text-white" opacity={0.7} busyness={40} />
 
 			<LocaleSwitcher />
 		</Section>
