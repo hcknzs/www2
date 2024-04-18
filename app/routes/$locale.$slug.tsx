@@ -98,8 +98,8 @@ const PageComponent = () => {
 			{/* eslint-disable-next-line react/jsx-no-literals */}
 			<h1 className="sr-only">hcknzs</h1>
 			<HxBoundary>
-				{/* TODO */}
-				<SectionRenderer sections={page.content as any} />
+				{/* @ts-expect-error This is a Remix/TS issue, maybe this one: https://github.com/remix-run/remix/issues/7599 */}
+				<SectionRenderer sections={page.content} />
 
 				<footer className="py-8 lg:py-24 flex flex-col bg-red text-black">
 					<SectionInner className="py-6">
