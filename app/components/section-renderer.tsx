@@ -17,6 +17,14 @@ type SectionRendererProps = {
 	sections: Array<SectionType>;
 };
 
+const hxRule = renderNodeRule(isHeading, ({ node, children, key }) => {
+	return (
+		<Hx increment={Math.max(0, node.level - 1)} key={key}>
+			{children}
+		</Hx>
+	);
+});
+
 export const SectionRenderer: React.FC<SectionRendererProps> = ({
 	sections,
 }) => {
@@ -60,24 +68,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 							>
 								<ProseWrapper>
 									<StructuredText
-										customNodeRules={[
-											renderNodeRule(
-												isHeading,
-												({ node, children, key }) => {
-													return (
-														<Hx
-															increment={Math.max(
-																0,
-																node.level - 1,
-															)}
-															key={key}
-														>
-															{children}
-														</Hx>
-													);
-												},
-											),
-										]}
+										customNodeRules={[hxRule]}
 										data={section.content}
 									/>
 								</ProseWrapper>

@@ -12,6 +12,7 @@ import { pageQuery } from "~/queries";
 import { SectionRenderer } from "~/components/section-renderer";
 import { getLocaleFromParams } from "~/utils/i18n-ssr";
 import { useString } from "~/i18n";
+import { FundingSection } from "~/components/funding-section";
 
 export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
@@ -85,6 +86,7 @@ const PageComponent = () => {
 						</a>
 					</ProseWrapper>
 				</footer>
+				<FundingSection />
 			</HxBoundary>
 		</main>
 	);

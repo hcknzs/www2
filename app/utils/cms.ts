@@ -6,29 +6,37 @@ import { ResultOf, VariablesOf } from "~/graphql";
 export const fetchFromCms = async <Q extends DocumentNode>({
 	query,
 	variables,
+	environment,
+	excludeInvalid,
+	includeDrafts,
 }: {
 	query: Q;
 	variables: VariablesOf<Q>;
+	environment?: string;
+	includeDrafts?: boolean;
+	excludeInvalid?: boolean;
 }) => {
 	const url = env.CMS_ENDPOINT;
 
-	const headers = {
-		Authorization: `Bearer ${env.CMS_API_TOKEN_READONLY}`,
-	};
+	const headers = new Map<string, string>();
 
-	// if (process.env.CMS_ENVIRONMENT) {
-	//   headers['X-Environment'] = process.env.CMS_ENVIRONMENT;
-	// }
-	// if (includeDrafts) {
-	//   headers['X-Include-Drafts'] = 'true';
-	// }
-	// if (excludeInvalid) {
-	//   headers['X-Exclude-Invalid = 'true';
-	// }
+	headers.set("Authorization", `Bearer ${env.CMS_API_TOKEN_READONLY}`);
+
+	if (environment) {
+		headers.set("X-Environment", environment);
+	}
+
+	if (includeDrafts) {
+		headers.set("X-Include-Drafts", "true");
+	}
+
+	if (excludeInvalid) {
+		headers.set("X-Exclude-Invalid", "true");
+	}
 
 	const response = await fetch(url, {
 		body: JSON.stringify({ query: print(query), variables }),
-		headers,
+		headers: Object.fromEntries(headers.entries()),
 		method: "POST",
 	});
 
