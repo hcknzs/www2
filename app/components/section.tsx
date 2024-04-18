@@ -16,7 +16,7 @@ const themes = {
 export const isTheme = (color: string): color is keyof typeof themes =>
 	color in themes;
 
-export const TextSection: React.FC<
+export const Section: React.FC<
 	HTMLProps<HTMLDivElement> & {
 		anchor?: string;
 		innerClassName?: string;
@@ -40,7 +40,6 @@ export const TextSection: React.FC<
 			{anchor && (
 				<a
 					className="xl:sticky left-4 top-4 emoji-white"
-					// TODO
 					aria-label={t("anchor")}
 					href={`#${anchor}`}
 				>

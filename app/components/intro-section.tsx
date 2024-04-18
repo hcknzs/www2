@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import type { ReactNode } from "react";
-import { TextSection } from "./text-section";
+import { Section } from "./section";
 import { Noise } from "./noise";
 import { tw } from "~/utils/tailwind";
 import { useLocale, useString } from "~/i18n";
@@ -33,9 +33,9 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
 	const t = useString();
 
 	return (
-		<TextSection
+		<Section
 			theme="red"
-			className={tw`flex-1 flex`}
+			className={tw`flex-1 flex min-h-[90vh]`}
 			innerClassName={tw`mt-0 mb-0 w-full flex flex-col gap-8 lg:gap-16 items-center justify-center`}
 		>
 			<a
@@ -56,6 +56,6 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
 			<Noise className="text-lime" opacity={0.7} busyness={40} />
 
 			<LocaleSwitcher />
-		</TextSection>
+		</Section>
 	);
 };

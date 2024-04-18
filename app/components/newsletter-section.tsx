@@ -1,6 +1,6 @@
 import { useFetcher } from "@remix-run/react";
-import { TextSection } from "./text-section";
-import { Html } from "./html";
+import { Hx } from "uberschrift";
+import { Section } from "./section";
 import { cn, tw } from "~/utils/tailwind";
 import type { ActionData } from "~/routes/$locale.$slug";
 import { useString } from "~/i18n";
@@ -23,13 +23,15 @@ const SubmitButton: React.FC<{
 };
 
 type NewsletterSectionProps = {
-	intro?: string;
+	title: string;
+	subline: string;
 	instagramLinkText: string;
 };
 
 export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 	instagramLinkText,
-	intro,
+	title,
+	subline,
 }) => {
 	const t = useString();
 	const { Form, state, data } = useFetcher<ActionData>();
@@ -38,19 +40,20 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 
 	if (isSuccess) {
 		return (
-			<TextSection theme="lime" className="text-purple-400">
+			<Section theme="lime" className="text-purple-400">
 				<div className="text-center font-plex-mono tracking-plex-mono">
 					<p className="text-4xl">{t("newsletter.thanks")}</p>
 				</div>
-			</TextSection>
+			</Section>
 		);
 	}
 
 	return (
-		<TextSection theme="lime" className="text-purple-400">
+		<Section theme="lime" className="text-purple-400">
 			<div className="max-w-screen-2xl m-auto flex flex-col gap-8 lg:flex-row justify-center items-middle">
 				<div className="lg:text-right font-plex-mono tracking-plex-mono">
-					<Html raw={intro} />
+					<Hx className="font-bold italic text-3xl">{title}</Hx>
+					<p>{subline}</p>
 				</div>
 				<Form
 					method="POST"
@@ -97,6 +100,6 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 					{t("newsletter.instagram")}
 				</a>
 			</p>
-		</TextSection>
+		</Section>
 	);
 };

@@ -25,7 +25,8 @@ export const pageQuery = graphql(`
 				... on SectionNewsletterRecord {
 					id
 					instagramLinkText
-					intro(markdown: true)
+					title
+					subline
 				}
 				... on SectionTextRecord {
 					id

@@ -1,8 +1,9 @@
-import { StructuredText } from "react-datocms";
-import { isStructuredText } from "datocms-structured-text-utils";
+import { StructuredText, renderNodeRule } from "react-datocms";
+import { isStructuredText, isHeading } from "datocms-structured-text-utils";
+import { Hx } from "uberschrift";
 import { IntroSection } from "./intro-section";
 import { NewsletterSection } from "./newsletter-section";
-import { TextSection, isTheme } from "./text-section";
+import { ProseWrapper, Section, isTheme } from "./section";
 import type { pageQuery } from "~/queries";
 import { ResultOf } from "~/graphql";
 import { replacePipeWithBr } from "~/i18n";
@@ -34,7 +35,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 						return (
 							<NewsletterSection
 								key={section.id}
-								intro={section.intro ?? undefined}
+								title={section.title ?? undefined}
+								subline={section.subline ?? undefined}
 								instagramLinkText={section.instagramLinkText}
 							/>
 						);
@@ -44,7 +46,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 						}
 
 						return (
-							<TextSection
+							<Section
 								key={section.id}
 								theme={
 									isTheme(section.sectionTheme)
@@ -53,8 +55,30 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 								}
 								anchor={section.sectionSlug ?? undefined}
 							>
-								<StructuredText data={section.content} />
-							</TextSection>
+								<ProseWrapper>
+									<StructuredText
+										customNodeRules={[
+											renderNodeRule(
+												isHeading,
+												({ node, children, key }) => {
+													return (
+														<Hx
+															increment={Math.max(
+																0,
+																node.level - 1,
+															)}
+															key={key}
+														>
+															{children}
+														</Hx>
+													);
+												},
+											),
+										]}
+										data={section.content}
+									/>
+								</ProseWrapper>
+							</Section>
 						);
 					}
 					default:

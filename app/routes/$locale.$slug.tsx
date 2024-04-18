@@ -5,7 +5,7 @@ import { json } from "@remix-run/node";
 import { toRemixMeta } from "react-datocms/seo";
 import type { ServerRuntimeMetaArgs } from "@remix-run/server-runtime";
 import { useLoaderData } from "@remix-run/react";
-import { ProseWrapper, SectionInner } from "~/components/text-section";
+import { ProseWrapper, SectionInner } from "~/components/section";
 import { env } from "~/env";
 import { fetchFromCms } from "~/utils/cms";
 import { pageQuery } from "~/queries";
