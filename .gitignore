@@ -6,3 +6,5 @@ node_modules
 .env
 .vercel
 .DS_Store
+schema.graphql
+app/graphql-env.d.ts

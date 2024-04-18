@@ -1,9 +1,9 @@
-import { Hx } from "uberschrift";
 import { useFetcher } from "@remix-run/react";
-import { Section } from "./misc";
+import { Hx } from "uberschrift";
+import { Section } from "./section";
 import { cn, tw } from "~/utils/tailwind";
-import { ActionData } from "~/routes/_index";
-import { usePipedString, useString } from "~/i18n";
+import type { ActionData } from "~/routes/$locale.$slug";
+import { useString } from "~/i18n";
 
 const SubmitButton: React.FC<{
 	isLoading?: boolean;
@@ -22,30 +22,38 @@ const SubmitButton: React.FC<{
 	);
 };
 
-export const NewsletterSection = () => {
-	const p = usePipedString();
+type NewsletterSectionProps = {
+	title: string;
+	subline: string;
+	instagramLinkText: string;
+};
+
+export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
+	instagramLinkText,
+	title,
+	subline,
+}) => {
+	const t = useString();
 	const { Form, state, data } = useFetcher<ActionData>();
 	const isLoading = state === "submitting";
 	const isSuccess = data?.isSuccess;
 
 	if (isSuccess) {
 		return (
-			<Section color="lime" className="text-purple-400">
+			<Section theme="lime" className="text-purple-400">
 				<div className="text-center font-plex-mono tracking-plex-mono">
-					<p className="text-4xl">Danke!</p>
+					<p className="text-4xl">{t("newsletter.thanks")}</p>
 				</div>
 			</Section>
 		);
 	}
 
 	return (
-		<Section color="lime" className="text-purple-400">
+		<Section theme="lime" className="text-purple-400">
 			<div className="max-w-screen-2xl m-auto flex flex-col gap-8 lg:flex-row justify-center items-middle">
 				<div className="lg:text-right font-plex-mono tracking-plex-mono">
-					<Hx className="font-bold italic text-3xl">
-						{p("newsletter.title")}
-					</Hx>
-					<p className="">{p("newsletter.subline")}</p>
+					<Hx className="font-bold italic text-3xl">{title}</Hx>
+					<p>{subline}</p>
 				</div>
 				<Form
 					method="POST"
@@ -53,7 +61,7 @@ export const NewsletterSection = () => {
 					className="flex flex-col gap-4 sm:flex-row sm:gap-0 lg:pt-3"
 				>
 					<label htmlFor="email" className="sr-only">
-						E-Mail
+						{t("newsletter.email")}
 					</label>
 					<input
 						type="email"
@@ -83,13 +91,13 @@ export const NewsletterSection = () => {
 					target="_blank"
 					rel="noreferrer"
 				>
-					{p("newsletter.follow")}{" "}
+					{instagramLinkText}{" "}
 					<img
 						className="w-6 h-6 inline"
-						src="insta.svg"
+						src="/insta.svg"
 						alt="Instagram logo"
 					/>{" "}
-					Instagram!
+					{t("newsletter.instagram")}
 				</a>
 			</p>
 		</Section>

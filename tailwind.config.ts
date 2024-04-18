@@ -12,7 +12,7 @@ const beams = Object.fromEntries(
 );
 
 export default {
-	content: ["./app/**/*.{js,jsx,ts,tsx,mdx}"],
+	content: ["./app/**/*.{js,jsx,ts,tsx}"],
 	plugins: [
 		typography,
 		plugin(({ addUtilities }) => {
