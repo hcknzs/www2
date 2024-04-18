@@ -2,7 +2,7 @@
 
 import { cn } from "./tailwind";
 
-export type SLC<P = object> = React.FC<
+type SLC<P = object> = React.FC<
 	{
 		children?: React.ReactNode;
 		className?: string;

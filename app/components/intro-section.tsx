@@ -1,8 +1,9 @@
 import { Link } from "@remix-run/react";
-import { Section } from "./misc";
+import type { ReactNode } from "react";
+import { TextSection } from "./text-section";
 import { Noise } from "./noise";
 import { tw } from "~/utils/tailwind";
-import { useLocale, usePipedString, useString } from "~/i18n";
+import { useLocale, useString } from "~/i18n";
 
 const LocaleSwitcher = () => {
 	const locale = useLocale();
@@ -20,13 +21,20 @@ const LocaleSwitcher = () => {
 	);
 };
 
-export const IntroSection = () => {
+type IntroSectionProps = {
+	subline: ReactNode;
+	dateLocation: ReactNode;
+};
+
+export const IntroSection: React.FC<IntroSectionProps> = ({
+	dateLocation,
+	subline,
+}) => {
 	const t = useString();
-	const p = usePipedString();
 
 	return (
-		<Section
-			color="red"
+		<TextSection
+			theme="red"
 			className={tw`flex-1 flex`}
 			innerClassName={tw`mt-0 mb-0 w-full flex flex-col gap-8 lg:gap-16 items-center justify-center`}
 		>
@@ -40,14 +48,14 @@ export const IntroSection = () => {
 			</a>
 
 			<p className="text-white font-plex-mono tracking-plex-mono text-sm lg:text-xl text-center">
-				{p("subline")}
+				{subline}
 			</p>
 			<p className="text-lime font-plex-mono tracking-plex-mono text-sm lg:text-md text-center">
-				{p("date-location")}
+				{dateLocation}
 			</p>
 			<Noise className="text-lime" opacity={0.7} busyness={40} />
 
 			<LocaleSwitcher />
-		</Section>
+		</TextSection>
 	);
 };

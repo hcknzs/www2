@@ -1,6 +1,6 @@
 import { useClientState } from "./use-client-state";
 
-export const isSSR = typeof window === "undefined";
+const isSSR = typeof window === "undefined";
 
 const getPrefersReducedMotion = () => {
 	if (isSSR) return true;

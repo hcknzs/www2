@@ -1,7 +1,6 @@
+import type { ReactElement, ReactNode } from "react";
 import {
 	Fragment,
-	ReactElement,
-	ReactNode,
 	createElement,
 	isValidElement,
 	createContext,
@@ -9,38 +8,32 @@ import {
 } from "react";
 
 const de = {
-	"date-location": "Augsburg, 19.—21. Juli 2024",
-	"funding.alt":
-		"Gefördert vom: Bundesministerium für Familie, Senioren, Frauen und Jugend im Rahmen des Bundesprogramms Demokratie Leben!",
-	"funding.title": "Förderungen",
-	"newsletter.follow": "Oder folge uns auf",
-	"newsletter.subline":
-		"Lass' uns deine E-Mail da und wir melden uns bei dir!",
-	"newsletter.title": "Interesse?",
+	anchor: "Direktlink zu diesem Abschnitt",
+	"newsletter.email": "email",
+	"newsletter.instagram": "Instagram!",
+	"newsletter.thanks": "Danke!",
 	"scroll-to-bottom": "Nach unten scrollen",
 	send: "Absenden",
-	subline: "Hackathon und Ideenfestival|für neue Protestformen",
 	"switch-language": "Switch language",
 } as const;
 
 const en = {
-	"date-location": "Augsburg, July 19—21 2024",
-	"funding.alt":
-		"Funded by: Federal Ministry for Family Affairs, Senior Citizens, Women and Youth as part of the federal program Demokratie Leben!",
-	"funding.title": "Fundings",
-	"newsletter.follow": "Or follow us on",
-	"newsletter.subline": "Leave us your E-Mail and we will get back to you!",
-	"newsletter.title": "Interested?",
+	anchor: "Direct link to this section",
+	"newsletter.email": "email",
+	"newsletter.instagram": "Instagram!",
+	"newsletter.thanks": "Thanks!",
 	"scroll-to-bottom": "Scroll to bottom",
 	send: "Send",
-	subline: "Hackathon and ideas festival|for new forms of protest",
 	"switch-language": "Sprache wechseln",
 } as const;
 
 const locales = ["de", "en"] as const;
 type Locale = (typeof locales)[number];
 
-export const StringContext = createContext<Locale>("de");
+export const isLocale = (str: string): str is Locale =>
+	locales.includes(str as Locale);
+
+const StringContext = createContext<Locale>("de");
 
 export const StringProvider: React.FC<{
 	locale: Locale;
@@ -59,7 +52,7 @@ export const replacePipeWithBr = (str?: string) => {
 	return replaceInString(str, "|", createElement("br"));
 };
 
-export const replaceInString = (
+const replaceInString = (
 	haystack: string,
 	needle: string,
 	replace: ReactNode,
@@ -94,10 +87,4 @@ export const useString = (forceLocale?: Locale) => {
 
 	const language = locale === "de" ? de : en;
 	return (key: keyof typeof language) => language[key];
-};
-
-export const usePipedString = (forceLocale?: Locale) => {
-	const t = useString(forceLocale);
-
-	return (key: keyof typeof de) => replacePipeWithBr(t(key));
 };
