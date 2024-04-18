@@ -9,6 +9,9 @@ import {
 
 const de = {
 	anchor: "Direktlink zu diesem Abschnitt",
+	"funding.alt":
+		"Gefördert vom: Bundesministerium für Familie, Senioren, Frauen und Jugend im Rahmen des Bundesprogramms Demokratie Leben!",
+	"funding.title": "Förderungen",
 	"newsletter.email": "email",
 	"newsletter.instagram": "Instagram!",
 	"newsletter.thanks": "Danke!",
@@ -19,6 +22,9 @@ const de = {
 
 const en = {
 	anchor: "Direct link to this section",
+	"funding.alt":
+		"Funded by: Federal Ministry for Family Affairs, Senior Citizens, Women and Youth as part of the federal program Demokratie Leben!",
+	"funding.title": "Fundings",
 	"newsletter.email": "email",
 	"newsletter.instagram": "Instagram!",
 	"newsletter.thanks": "Thanks!",

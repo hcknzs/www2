@@ -1,12 +1,12 @@
 import { Hx } from "uberschrift";
-import { Section } from "./misc";
+import { Section } from "./section";
 import { useString } from "~/i18n";
 
 export const FundingSection = () => {
 	const t = useString();
 
 	return (
-		<Section color="white">
+		<Section theme="white">
 			<div className="max-w-screen-sm m-auto">
 				<Hx className="sr-only">{t("funding.title")}</Hx>
 				<a

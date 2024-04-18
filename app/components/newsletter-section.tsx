@@ -91,10 +91,10 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({
 					target="_blank"
 					rel="noreferrer"
 				>
-					{instagramLinkText}
+					{instagramLinkText}{" "}
 					<img
 						className="w-6 h-6 inline"
-						src="insta.svg"
+						src="/insta.svg"
 						alt="Instagram logo"
 					/>{" "}
 					{t("newsletter.instagram")}

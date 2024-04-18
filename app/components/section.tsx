@@ -11,6 +11,7 @@ const themes = {
 	purple: tw`bg-purple-400 text-black`,
 	red: tw`bg-red text-black`,
 	teal: tw`bg-teal-300 text-white`,
+	white: tw`bg-white text-black`,
 };
 
 export const isTheme = (color: string): color is keyof typeof themes =>

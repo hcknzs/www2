@@ -4,6 +4,7 @@ import { Hx } from "uberschrift";
 import { IntroSection } from "./intro-section";
 import { NewsletterSection } from "./newsletter-section";
 import { ProseWrapper, Section, isTheme } from "./section";
+import { FundingSection } from "./funding-section";
 import type { pageQuery } from "~/queries";
 import { ResultOf } from "~/graphql";
 import { replacePipeWithBr } from "~/i18n";
@@ -23,6 +24,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 		<>
 			{sections.map((section) => {
 				switch (section.__typename) {
+					case "SectionFundingRecord":
+						return <FundingSection key={section.id} />;
 					case "SectionIntroRecord":
 						return (
 							<IntroSection

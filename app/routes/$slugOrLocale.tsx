@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs} from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import PageComponent, {
 	action,
@@ -17,7 +17,10 @@ export const loader = async (args: LoaderFunctionArgs) => {
 	}
 
 	if (isLocale(slugOrLocale)) {
-		return realLoader(args);
+		return realLoader({
+			...args,
+			params: { locale: slugOrLocale, slug: "index" },
+		});
 	}
 
 	return redirect(`/de/${slugOrLocale}`);

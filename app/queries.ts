@@ -17,6 +17,10 @@ export const pageQuery = graphql(`
 			urlSlug
 			content {
 				__typename
+				... on SectionFundingRecord {
+					id
+				}
+
 				... on SectionIntroRecord {
 					id
 					subline
