@@ -19,7 +19,7 @@ import stylesheet from "./tailwind.css";
 import { fetchFromCms } from "./utils/cms";
 import { graphql } from "./graphql";
 import { StringProvider } from "./i18n";
-import { getLocaleFromParams } from "./utils/i18n-ssr";
+import { getLocaleFromParams } from "./utils/loader-fns";
 
 export const loader = async ({ context, params }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);

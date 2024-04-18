@@ -14,7 +14,7 @@ import {
 	getPageByIdAndLocale,
 } from "~/queries";
 import { SectionRenderer } from "~/components/section-renderer";
-import { getLocaleFromParams } from "~/utils/i18n-ssr";
+import { getLocaleFromParams } from "~/utils/loader-fns";
 import { Locale, useString } from "~/i18n";
 import { FundingSection } from "~/components/funding-section";
 
