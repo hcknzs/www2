@@ -1,4 +1,4 @@
-import type { HTMLProps } from "react";
+import type { ComponentProps } from "react";
 import { useString } from "~/i18n";
 import { prose } from "~/styles";
 import { slc } from "~/utils/components";
@@ -18,7 +18,7 @@ export const isTheme = (color: string): color is keyof typeof themes =>
 	color in themes;
 
 export const Section: React.FC<
-	HTMLProps<HTMLDivElement> & {
+	ComponentProps<"div"> & {
 		anchor?: string;
 		innerClassName?: string;
 		theme?: keyof typeof themes;
@@ -44,7 +44,10 @@ export const Section: React.FC<
 					aria-label={t("anchor")}
 					href={`#${anchor}`}
 				>
-					⚓
+					{
+						// this comment is here to eslint shuts up
+						"⚓"
+					}
 				</a>
 			)}
 			<div className={cn(innerClassName, "lg:py-16")}>{children}</div>

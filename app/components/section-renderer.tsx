@@ -38,8 +38,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 						return (
 							<NewsletterSection
 								key={section.id}
-								title={section.title ?? undefined}
-								subline={section.subline ?? undefined}
+								title={section.title}
+								subline={section.subline}
 								instagramLinkText={section.instagramLinkText}
 							/>
 						);

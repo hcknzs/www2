@@ -11,6 +11,7 @@ import { fetchFromCms } from "~/utils/cms";
 import { pageQuery } from "~/queries";
 import { SectionRenderer } from "~/components/section-renderer";
 import { getLocaleFromParams } from "~/utils/i18n-ssr";
+import { useString } from "~/i18n";
 
 export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
@@ -45,11 +46,12 @@ export const meta = ({ data }: ServerRuntimeMetaArgs<typeof loader>) => {
 };
 
 const PageComponent = () => {
+	const t = useString();
 	const { page } = useLoaderData<typeof loader>();
 
 	return (
 		<main>
-			{}
+			{/* eslint-disable-next-line react/jsx-no-literals */}
 			<h1 className="sr-only">hcknzs</h1>
 			<HxBoundary>
 				{/* TODO */}
@@ -79,7 +81,7 @@ const PageComponent = () => {
 							rel="noreferrer"
 							className="font-plex-mono tracking-plex-mono"
 						>
-							Impressum & Datenschutz
+							{t("footer.legal")}
 						</a>
 					</ProseWrapper>
 				</footer>

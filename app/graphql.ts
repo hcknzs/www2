@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports */
 import { initGraphQLTada } from "gql.tada";
 import type { introspection } from "./graphql-env.d.ts";
 
