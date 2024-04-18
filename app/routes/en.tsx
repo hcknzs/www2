@@ -9,6 +9,7 @@ import { NewsletterSection } from "~/components/newsletter-section";
 import { Noise } from "~/components/noise";
 import { IntroSection } from "~/components/intro-section";
 import { StringProvider } from "~/i18n";
+import { FundingSection } from "~/components/funding-section";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -88,6 +89,7 @@ const Index = () => {
 							</a>
 						</ProseWrapper>
 					</footer>
+					<FundingSection />
 				</HxBoundary>
 			</main>
 		</StringProvider>

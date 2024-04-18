@@ -10,6 +10,9 @@ import {
 
 const de = {
 	"date-location": "Augsburg, 19.—21. Juli 2024",
+	"funding.alt":
+		"Gefördert vom: Bundesministerium für Familie, Senioren, Frauen und Jugend im Rahmen des Bundesprogramms Demokratie Leben!",
+	"funding.title": "Förderungen",
 	"newsletter.follow": "Oder folge uns auf",
 	"newsletter.subline":
 		"Lass' uns deine E-Mail da und wir melden uns bei dir!",
@@ -22,6 +25,9 @@ const de = {
 
 const en = {
 	"date-location": "Augsburg, July 19—21 2024",
+	"funding.alt":
+		"Funded by: Federal Ministry for Family Affairs, Senior Citizens, Women and Youth as part of the federal program Demokratie Leben!",
+	"funding.title": "Fundings",
 	"newsletter.follow": "Or follow us on",
 	"newsletter.subline": "Leave us your E-Mail and we will get back to you!",
 	"newsletter.title": "Interested?",
