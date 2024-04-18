@@ -5,6 +5,7 @@ import { IntroSection } from "./intro-section";
 import { NewsletterSection } from "./newsletter-section";
 import { ProseWrapper, Section, isTheme } from "./section";
 import { FundingSection } from "./funding-section";
+import { Noise } from "./noise";
 import { replacePipeWithBr } from "~/i18n";
 import { SectionType } from "~/queries";
 
@@ -67,6 +68,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 										data={section.content}
 									/>
 								</ProseWrapper>
+								{section.noise && <Noise />}
 							</Section>
 						);
 					}

@@ -39,6 +39,7 @@ const pageContentFragment = graphql(`
 				id
 				sectionSlug
 				sectionTheme
+				noise
 				content {
 					blocks
 					links
