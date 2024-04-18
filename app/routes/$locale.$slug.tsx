@@ -15,7 +15,7 @@ import {
 } from "~/queries";
 import { SectionRenderer } from "~/components/section-renderer";
 import { getLocaleFromParams } from "~/utils/loader-fns";
-import { Locale, useString } from "~/i18n";
+import { Locale, StringProvider, useString } from "~/i18n";
 import { FundingSection } from "~/components/funding-section";
 
 const resolveReferencePageSections = async (
@@ -91,47 +91,49 @@ export const meta = ({ data }: ServerRuntimeMetaArgs<typeof loader>) => {
 
 const PageComponent = () => {
 	const t = useString();
-	const { page } = useLoaderData<typeof loader>();
+	const { page, locale } = useLoaderData<typeof loader>();
 
 	return (
-		<main>
-			{/* eslint-disable-next-line react/jsx-no-literals */}
-			<h1 className="sr-only">hcknzs</h1>
-			<HxBoundary>
-				{/* @ts-expect-error This is a Remix/TS issue, maybe this one: https://github.com/remix-run/remix/issues/7599 */}
-				<SectionRenderer sections={page.content} />
+		<StringProvider locale={locale}>
+			<main>
+				{/* eslint-disable-next-line react/jsx-no-literals */}
+				<h1 className="sr-only">hcknzs</h1>
+				<HxBoundary>
+					{/* @ts-expect-error This is a Remix/TS issue, maybe this one: https://github.com/remix-run/remix/issues/7599 */}
+					<SectionRenderer sections={page.content} />
 
-				<footer className="py-8 lg:py-24 flex flex-col bg-red text-black">
-					<SectionInner className="py-6">
-						<a
-							href="#intro"
-							className="inline-block"
-							aria-label="Nach oben scrollen"
-						>
-							<img
-								src="/signet.svg"
-								alt="hcknzs"
-								className="w-auto h-6 align-middle relative top-[0.3em]"
-							/>
-						</a>
-						<span className="font-plex-mono tracking-plex-mono text-lime ml-3 text-2xl">
-							{new Date().getFullYear()}
-						</span>
-					</SectionInner>
-					<ProseWrapper>
-						<a
-							href="https://bluespotsproductions.de/impressum"
-							target="_blank"
-							rel="noreferrer"
-							className="font-plex-mono tracking-plex-mono"
-						>
-							{t("footer.legal")}
-						</a>
-					</ProseWrapper>
-				</footer>
-				<FundingSection />
-			</HxBoundary>
-		</main>
+					<footer className="py-8 lg:py-24 flex flex-col bg-red text-black">
+						<SectionInner className="py-6">
+							<a
+								href="#intro"
+								className="inline-block"
+								aria-label="Nach oben scrollen"
+							>
+								<img
+									src="/signet.svg"
+									alt="hcknzs"
+									className="w-auto h-6 align-middle relative top-[0.3em]"
+								/>
+							</a>
+							<span className="font-plex-mono tracking-plex-mono text-lime ml-3 text-2xl">
+								{new Date().getFullYear()}
+							</span>
+						</SectionInner>
+						<ProseWrapper>
+							<a
+								href="https://bluespotsproductions.de/impressum"
+								target="_blank"
+								rel="noreferrer"
+								className="font-plex-mono tracking-plex-mono"
+							>
+								{t("footer.legal")}
+							</a>
+						</ProseWrapper>
+					</footer>
+					<FundingSection />
+				</HxBoundary>
+			</main>
+		</StringProvider>
 	);
 };
 
