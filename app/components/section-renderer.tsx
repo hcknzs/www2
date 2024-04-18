@@ -5,13 +5,8 @@ import { IntroSection } from "./intro-section";
 import { NewsletterSection } from "./newsletter-section";
 import { ProseWrapper, Section, isTheme } from "./section";
 import { FundingSection } from "./funding-section";
-import type { pageQuery } from "~/queries";
-import { ResultOf } from "~/graphql";
 import { replacePipeWithBr } from "~/i18n";
-
-type SectionType = NonNullable<
-	NonNullable<ResultOf<typeof pageQuery>["page"]>["content"]
->[number];
+import { SectionType } from "~/queries";
 
 type SectionRendererProps = {
 	sections: Array<SectionType>;

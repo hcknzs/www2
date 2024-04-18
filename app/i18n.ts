@@ -36,7 +36,7 @@ const en = {
 } as const;
 
 const locales = ["de", "en"] as const;
-type Locale = (typeof locales)[number];
+export type Locale = (typeof locales)[number];
 
 export const isLocale = (str: string): str is Locale =>
 	locales.includes(str as Locale);

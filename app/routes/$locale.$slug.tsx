@@ -8,18 +8,59 @@ import { useLoaderData } from "@remix-run/react";
 import { ProseWrapper, SectionInner } from "~/components/section";
 import { env } from "~/env";
 import { fetchFromCms } from "~/utils/cms";
-import { pageQuery } from "~/queries";
+import {
+	SectionType,
+	getPageBySlugAndLocale,
+	getPageByIdAndLocale,
+} from "~/queries";
 import { SectionRenderer } from "~/components/section-renderer";
 import { getLocaleFromParams } from "~/utils/i18n-ssr";
-import { useString } from "~/i18n";
+import { Locale, useString } from "~/i18n";
 import { FundingSection } from "~/components/funding-section";
+
+const resolveReferencePageSections = async (
+	sections: Array<SectionType>,
+	locale: Locale,
+	depth = 0,
+): Promise<Array<SectionType>> => {
+	if (depth > 3) {
+		throw new Error("Too many nested references (max 3)");
+	}
+
+	const promises = sections.map(async (section) => {
+		if (section.__typename === "ReferencePageSectionCollectionRecord") {
+			const pageId = section.page.id;
+
+			const { page } = await fetchFromCms({
+				query: getPageByIdAndLocale,
+				variables: { id: pageId, locale },
+			});
+
+			if (!page) {
+				return [];
+			}
+
+			page.content = await resolveReferencePageSections(
+				page.content,
+				locale,
+				depth + 1,
+			);
+
+			return page.content;
+		}
+
+		return section;
+	});
+
+	return (await Promise.all(promises)).flat();
+};
 
 export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
 	const slug = params.slug ?? "index";
 
 	const { page } = await fetchFromCms({
-		query: pageQuery,
+		query: getPageBySlugAndLocale,
 		variables: { locale, slug },
 	});
 
@@ -30,7 +71,9 @@ export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 		});
 	}
 
-	return { locale, page, slugs: slug };
+	const content = await resolveReferencePageSections(page.content, locale);
+
+	return { locale, page: { ...page, content }, slugs: slug };
 };
 
 export const meta = ({ data }: ServerRuntimeMetaArgs<typeof loader>) => {
