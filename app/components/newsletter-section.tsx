@@ -1,7 +1,7 @@
 import { useFetcher } from "@remix-run/react";
 import { Hx } from "uberschrift";
+import { cn, tw } from "@peerigon/pupper/tailwind";
 import { Section } from "./section";
-import { cn, tw } from "~/utils/tailwind";
 import type { ActionData } from "~/routes/$locale.$slug";
 import { useString } from "~/i18n";
 

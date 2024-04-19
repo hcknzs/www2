@@ -7,7 +7,7 @@ import { ProseWrapper, Section, isTheme } from "./section";
 import { FundingSection } from "./funding-section";
 import { Noise } from "./noise";
 import { replacePipeWithBr } from "~/i18n";
-import { SectionType } from "~/queries";
+import type { SectionType } from "~/fragments";
 
 type SectionRendererProps = {
 	sections: Array<SectionType>;

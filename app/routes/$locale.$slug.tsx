@@ -10,13 +10,16 @@ import { env } from "~/env";
 import { fetchFromCms } from "~/utils/cms";
 import {
 	SectionType,
-	getPageBySlugAndLocale,
-	getPageByIdAndLocale,
-} from "~/queries";
+	pageContentFragment,
+	siteSettingsFragment,
+} from "~/fragments";
 import { SectionRenderer } from "~/components/section-renderer";
 import { getLocaleFromParams } from "~/utils/loader-fns";
 import { Locale, StringProvider, useString } from "~/i18n";
 import { FundingSection } from "~/components/funding-section";
+import { Navigation } from "~/components/navigation";
+import { normalizeSiteSettings } from "~/utils/normalize";
+import { graphql } from "~/graphql";
 
 const resolveReferencePageSections = async (
 	sections: Array<SectionType>,
@@ -32,7 +35,23 @@ const resolveReferencePageSections = async (
 			const pageId = section.page.id;
 
 			const { page } = await fetchFromCms({
-				query: getPageByIdAndLocale,
+				query: graphql(
+					`
+						query GetPageByIdAndLocale(
+							$id: ItemId!
+							$locale: SiteLocale!
+						) {
+							page(
+								locale: $locale
+								fallbackLocales: [de]
+								filter: { id: { eq: $id } }
+							) {
+								...PageContent
+							}
+						}
+					`,
+					[pageContentFragment],
+				),
 				variables: { id: pageId, locale },
 			});
 
@@ -59,8 +78,25 @@ export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
 	const slug = params.slug ?? "index";
 
-	const { page } = await fetchFromCms({
-		query: getPageBySlugAndLocale,
+	const { page, settings } = await fetchFromCms({
+		query: graphql(
+			`
+				query GetPageBySlugAndLocale(
+					$slug: String!
+					$locale: SiteLocale!
+				) {
+					...SiteSettings
+					page(
+						locale: $locale
+						fallbackLocales: [de]
+						filter: { urlSlug: { eq: $slug } }
+					) {
+						...PageContent
+					}
+				}
+			`,
+			[pageContentFragment, siteSettingsFragment],
+		),
 		variables: { locale, slug },
 	});
 
@@ -73,8 +109,15 @@ export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 
 	const content = await resolveReferencePageSections(page.content, locale);
 
-	return { locale, page: { ...page, content }, slugs: slug };
+	return {
+		locale,
+		page: { ...page, content },
+		...normalizeSiteSettings(settings, locale),
+		slugs: slug,
+	};
 };
+
+export type Loader = typeof loader;
 
 export const meta = ({ data }: ServerRuntimeMetaArgs<typeof loader>) => {
 	try {
@@ -95,6 +138,7 @@ const PageComponent = () => {
 
 	return (
 		<StringProvider locale={locale}>
+			<Navigation />
 			<main>
 				{/* eslint-disable-next-line react/jsx-no-literals */}
 				<h1 className="sr-only">hcknzs</h1>

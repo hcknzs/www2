@@ -22,11 +22,13 @@ export const fetchFromCms = async <Q extends DocumentNode>({
 
 	headers.set("Authorization", `Bearer ${env.CMS_API_TOKEN_READONLY}`);
 
+	const isLocalhost = env.LOCALHOST === "1";
+
 	if (environment) {
 		headers.set("X-Environment", environment);
 	}
 
-	if (includeDrafts) {
+	if (includeDrafts || isLocalhost) {
 		headers.set("X-Include-Drafts", "true");
 	}
 

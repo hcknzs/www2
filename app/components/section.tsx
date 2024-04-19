@@ -1,8 +1,8 @@
 import type { ComponentProps } from "react";
+import { cn, tw } from "@peerigon/pupper/tailwind";
 import { useString } from "~/i18n";
 import { prose } from "~/styles";
 import { slc } from "~/utils/components";
-import { cn, tw } from "~/utils/tailwind";
 
 const themes = {
 	black: tw`bg-black text-white`,
@@ -35,17 +35,17 @@ export const Section: React.FC<
 	return (
 		<section
 			id={anchor}
-			className={cn(className, themes[theme], tw`relative p-8`)}
+			className={cn(themes[theme], tw`relative p-8`, className)}
 			{...rest}
 		>
 			{anchor && (
 				<a
-					className="left-4 top-4 emoji-white xl:sticky"
+					className="top-12 mb-4 block w-fit emoji-white xl:sticky xl:-ml-4 xl:mb-0"
 					aria-label={t("anchor")}
 					href={`#${anchor}`}
 				>
 					{
-						// this comment is here to eslint shuts up
+						// this comment is here so eslint shuts up
 						"⚓"
 					}
 				</a>

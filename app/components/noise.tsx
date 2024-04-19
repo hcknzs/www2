@@ -1,6 +1,6 @@
 import { useIntervalEffect } from "@react-hookz/web";
 import { useState } from "react";
-import { cn } from "../utils/tailwind.js";
+import { cn } from "@peerigon/pupper/tailwind";
 import { usePrefersReducedMotion } from "../utils/misc.js";
 
 const particles = ["#", "*/", "/*", "~", "░", "▒", "▓", "+=", "~/", "./", "/."];

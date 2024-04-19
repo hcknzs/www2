@@ -13,6 +13,9 @@ const de = {
 	"funding.alt":
 		"Gefördert vom: Bundesministerium für Familie, Senioren, Frauen und Jugend im Rahmen des Bundesprogramms Demokratie Leben!",
 	"funding.title": "Förderungen",
+	"menu.close": "Menü schließen",
+	"menu.open": "Menü öffnen",
+	"menu.title": "Menü",
 	"newsletter.email": "email",
 	"newsletter.instagram": "Instagram!",
 	"newsletter.thanks": "Danke!",
@@ -21,12 +24,15 @@ const de = {
 	"switch-language": "Switch language",
 } as const;
 
-const en = {
+const en: Record<keyof typeof de, string> = {
 	anchor: "Direct link to this section",
 	"footer.legal": "Legal & Privacy Notice",
 	"funding.alt":
 		"Funded by: Federal Ministry for Family Affairs, Senior Citizens, Women and Youth as part of the federal program Demokratie Leben!",
 	"funding.title": "Fundings",
+	"menu.close": "Close menu",
+	"menu.open": "Open menu",
+	"menu.title": "Menu",
 	"newsletter.email": "email",
 	"newsletter.instagram": "Instagram!",
 	"newsletter.thanks": "Thanks!",

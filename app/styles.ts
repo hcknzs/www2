@@ -1,4 +1,4 @@
-import { cn, tw } from "./utils/tailwind";
+import { cn, tw } from "@peerigon/pupper/tailwind";
 
 export const prose = cn(
 	tw`prose md:prose-xl`,

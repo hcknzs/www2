@@ -1,25 +1,8 @@
-import { Link } from "@remix-run/react";
 import type { ReactNode } from "react";
+import { cn, tw } from "@peerigon/pupper/tailwind";
 import { Section } from "./section";
 import { Noise } from "./noise";
-import { cn, tw } from "~/utils/tailwind";
-import { useLocale, useString } from "~/i18n";
-
-const LocaleSwitcher = () => {
-	const locale = useLocale();
-	const t = useString();
-	const to = locale === "de" ? "/en" : "/";
-	const otherLocale = locale === "de" ? "EN" : "DE";
-
-	return (
-		<div className="absolute right-4 top-4 flex gap-4 font-plex-mono font-bold">
-			<span className="sr-only">{t("switch-language")}</span>
-			<Link className="text-white" to={to}>
-				{otherLocale}
-			</Link>
-		</div>
-	);
-};
+import { useString } from "~/i18n";
 
 type IntroSectionProps = {
 	subline: ReactNode;
@@ -60,8 +43,6 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
 				</p>
 			</div>
 			<Noise className="text-white" opacity={0.7} busyness={40} />
-
-			<LocaleSwitcher />
 		</Section>
 	);
 };
