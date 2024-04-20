@@ -10,6 +10,7 @@
 	},
 	"scripts": {
 		"build": "run-s build:gql:schema build:svg build:remix",
+		"build:gql:schema": "./scripts/gql.sh",
 		"build:remix": "remix build",
 		"build:svg": "pupper-svg -i ./svg-masters -o ./public/sprite.svg  -c ./app/components/icons -m ./app/components/icons/svg-sprite.tsx -H /sprite.svg -P",
 		"dev": "LOCALHOST=1 run-p dev:*",
