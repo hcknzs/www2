@@ -5,6 +5,7 @@ import { cn, tw } from "@peerigon/pupper/tailwind";
 import { Svg } from "./icons/svg-sprite";
 import { Loader } from "../routes/$locale.$slug";
 import { TransitionChildPreset } from "./transitions";
+import { LocaleLink } from "./locale-link";
 import { useString } from "~/i18n";
 import { useScrollDepth } from "~/utils/hooks";
 
@@ -109,6 +110,15 @@ export const Navigation = () => {
 											</TransitionChildPreset>
 										),
 									)}
+									<TransitionChildPreset
+										name="menu.item"
+										index={menuItems.length}
+									>
+										<LocaleLink
+											className="block hover:underline"
+											onClick={() => setIsOpen(false)}
+										/>
+									</TransitionChildPreset>
 								</Transition>
 							</Dialog.Panel>
 						</div>

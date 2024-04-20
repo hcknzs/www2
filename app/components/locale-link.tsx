@@ -1,7 +1,7 @@
 import { Link, LinkProps } from "@remix-run/react";
 import { useLocale, useString } from "~/i18n";
 
-export const LocaleLink = ({ className, to: _, ...rest }: LinkProps) => {
+export const LocaleLink = ({ className, ...rest }: Omit<LinkProps, "to">) => {
 	const locale = useLocale();
 	const t = useString();
 	const to = locale === "de" ? "/en" : "/";
