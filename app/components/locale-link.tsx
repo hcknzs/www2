@@ -1,18 +1,26 @@
 import { Link, LinkProps } from "@remix-run/react";
+import { forwardRef } from "react";
 import { useLocale, useString } from "~/i18n";
 
-export const LocaleLink = ({ className, ...rest }: Omit<LinkProps, "to">) => {
-	const locale = useLocale();
-	const t = useString();
-	const to = locale === "de" ? "/en" : "/";
-	const otherLocale = locale === "de" ? "EN" : "DE";
+export const LocaleLink = forwardRef<HTMLAnchorElement, Omit<LinkProps, "to">>(
+	({ className, ...rest }, ref) => {
+		const locale = useLocale();
+		const t = useString();
+		const to = locale === "de" ? "/en" : "/";
+		const otherLocale = locale === "de" ? "EN" : "DE";
 
-	return (
-		<>
-			<span className="sr-only">{t("switch-language")}</span>
-			<Link className={className} to={to} {...rest}>
+		return (
+			<Link
+				ref={ref}
+				aria-label={t("switch-language")}
+				className={className}
+				to={to}
+				{...rest}
+			>
 				{otherLocale}
 			</Link>
-		</>
-	);
-};
+		);
+	},
+);
+
+LocaleLink.displayName = "LocaleLink";

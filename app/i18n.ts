@@ -21,7 +21,7 @@ const de = {
 	"newsletter.thanks": "Danke!",
 	"scroll-to-bottom": "Nach unten scrollen",
 	send: "Absenden",
-	"switch-language": "Switch language",
+	"switch-language": "Switch language: Deutsch",
 } as const;
 
 const en: Record<keyof typeof de, string> = {
@@ -38,7 +38,7 @@ const en: Record<keyof typeof de, string> = {
 	"newsletter.thanks": "Thanks!",
 	"scroll-to-bottom": "Scroll to bottom",
 	send: "Send",
-	"switch-language": "Sprache wechseln",
+	"switch-language": "Sprache wechseln: Englisch",
 } as const;
 
 const locales = ["de", "en"] as const;
