@@ -67,7 +67,7 @@ export const Navigation = () => {
 									appear
 									show={isOpen}
 									as="div"
-									className={`flex min-w-[50vw] flex-col gap-2 text-left ${font}`}
+									className={`flex min-w-[50vw] flex-col gap-[0.25em] text-left ${font}`}
 								>
 									{menuItems.map(
 										(
@@ -96,18 +96,16 @@ export const Navigation = () => {
 										name="menu.item"
 										index={menuItems.length}
 									>
-										<span className="mt-8 flex gap-4 uppercase">
+										<span className="mt-8 flex gap-[0.25em] uppercase">
 											<Svg
 												name="world"
-												className="relative top-1 h-8 w-8 fill-white"
+												className="relative top-[0.125em] aspect-square h-[0.75em] fill-white"
 											/>
 											<LocaleLink
-												className="block hover:underline"
 												onClick={() => setIsOpen(false)}
 												isOther
 											/>
 											<LocaleLink
-												className="block hover:underline"
 												onClick={() => setIsOpen(false)}
 											/>
 										</span>

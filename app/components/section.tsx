@@ -20,6 +20,7 @@ export const isTheme = (color: string): color is keyof typeof themes =>
 export const Section: React.FC<
 	ComponentProps<"div"> & {
 		anchor?: string;
+		index?: number;
 		innerClassName?: string;
 		theme?: keyof typeof themes;
 	}
@@ -29,13 +30,22 @@ export const Section: React.FC<
 	innerClassName,
 	children,
 	anchor,
+	index,
 	...rest
 }) => {
 	const t = useString();
+
+	const isFirst = index === 0;
+
 	return (
 		<section
 			id={anchor}
-			className={cn(themes[theme], tw`relative p-8`, className)}
+			className={cn(
+				themes[theme],
+				tw`relative p-8`,
+				isFirst && "py-16",
+				className,
+			)}
 			{...rest}
 		>
 			{anchor && (

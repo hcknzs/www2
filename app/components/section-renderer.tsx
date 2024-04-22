@@ -27,7 +27,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 }) => {
 	return (
 		<>
-			{sections.map((section) => {
+			{sections.map((section, index) => {
 				switch (section.__typename) {
 					case "SectionFundingRecord":
 						return <FundingSection key={section.id} />;
@@ -56,6 +56,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 
 						return (
 							<Section
+								index={index}
 								key={section.id}
 								theme={
 									isTheme(section.sectionTheme)

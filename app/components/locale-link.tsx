@@ -19,7 +19,11 @@ export const LocaleLink = forwardRef<
 		<Link
 			ref={ref}
 			aria-label={t("switch-language")}
-			className={cn(isCurrent && "underline", className)}
+			className={cn(
+				isCurrent && "underline",
+				"hover:underline",
+				className,
+			)}
 			to={`/${linkLocale}`}
 			{...rest}
 		>
