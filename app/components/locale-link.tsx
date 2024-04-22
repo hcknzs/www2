@@ -1,26 +1,31 @@
+import { cn } from "@peerigon/pupper/tailwind";
 import { Link, LinkProps } from "@remix-run/react";
 import { forwardRef } from "react";
 import { useLocale, useString } from "~/i18n";
 
-export const LocaleLink = forwardRef<HTMLAnchorElement, Omit<LinkProps, "to">>(
-	({ className, ...rest }, ref) => {
-		const locale = useLocale();
-		const t = useString();
-		const to = locale === "de" ? "/en" : "/";
-		const otherLocale = locale === "de" ? "EN" : "DE";
+export const LocaleLink = forwardRef<
+	HTMLAnchorElement,
+	Omit<LinkProps, "to"> & { isOther?: boolean }
+>(({ className, isOther = false, ...rest }, ref) => {
+	const curentLocale = useLocale();
+	const uncurrentLocale = curentLocale === "de" ? "en" : "de";
 
-		return (
-			<Link
-				ref={ref}
-				aria-label={t("switch-language")}
-				className={className}
-				to={to}
-				{...rest}
-			>
-				{otherLocale}
-			</Link>
-		);
-	},
-);
+	const linkLocale = isOther ? curentLocale : uncurrentLocale;
+
+	const t = useString();
+	const isCurrent = curentLocale === linkLocale;
+
+	return (
+		<Link
+			ref={ref}
+			aria-label={t("switch-language")}
+			className={cn(isCurrent && "underline", className)}
+			to={`/${linkLocale}`}
+			{...rest}
+		>
+			{linkLocale}
+		</Link>
+	);
+});
 
 LocaleLink.displayName = "LocaleLink";

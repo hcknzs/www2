@@ -23,6 +23,8 @@ const presets = {
 			"delay-300",
 			"delay-400",
 			"delay-500",
+			"delay-600",
+			"delay-700",
 		];
 
 		const thisDelay =

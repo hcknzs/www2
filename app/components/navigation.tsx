@@ -6,6 +6,7 @@ import { Svg } from "./icons/svg-sprite";
 import { Loader } from "../routes/$locale.$slug";
 import { TransitionChildPreset } from "./transitions";
 import { LocaleLink } from "./locale-link";
+import { SvgWorld } from "./icons/world";
 import { useString } from "~/i18n";
 import { useScrollDepth } from "~/utils/hooks";
 
@@ -21,7 +22,7 @@ export const Navigation = () => {
 	return (
 		<nav
 			className={cn(
-				`lg:fixed lg:left-2 lg:top-2 lg:z-10`,
+				`fixed left-2 top-2 z-40`,
 				isInIntroSection ? "text-black" : "text-white",
 			)}
 		>
@@ -32,8 +33,11 @@ export const Navigation = () => {
 				className="flex"
 			>
 				<Svg
-					className={cn(tw`mr-2 block h-8 w-8 fill-current`)}
-					name="burger"
+					className={cn(
+						tw`mr-2 block h-8 w-8 fill-current`,
+						isOpen && tw`text-white`,
+					)}
+					name={isOpen ? "burger-close" : "burger"}
 				/>
 				<Svg
 					className={cn(
@@ -48,7 +52,7 @@ export const Navigation = () => {
 				<Dialog as="div" onClose={() => setIsOpen(false)}>
 					<TransitionChildPreset name="fade">
 						<div>
-							<div className="fixed inset-0 z-20 bg-black/85" />
+							<div className="fixed inset-0 z-20 bg-black/95" />
 						</div>
 					</TransitionChildPreset>
 
@@ -63,30 +67,8 @@ export const Navigation = () => {
 									appear
 									show={isOpen}
 									as="div"
-									className={`flex min-w-[50vw] flex-col gap-4 text-left ${font}`}
+									className={`flex min-w-[50vw] flex-col gap-2 text-left ${font}`}
 								>
-									<TransitionChildPreset name="fade">
-										<div>
-											<button
-												type="button"
-												className={cn(font, "sr-only")}
-												onClick={() => setIsOpen(false)}
-											>
-												{t("menu.close")}
-											</button>
-
-											<div
-												aria-hidden="true"
-												className={cn(
-													font,
-													"pointer-events-none fixed right-5 top-1/2 z-30 -translate-y-1/2 cursor-pointer not-italic",
-												)}
-												// eslint-disable-next-line react/jsx-no-literals
-											>
-												⛌
-											</div>
-										</div>
-									</TransitionChildPreset>
 									{menuItems.map(
 										(
 											{ label, to, key, ...rest },
@@ -114,10 +96,21 @@ export const Navigation = () => {
 										name="menu.item"
 										index={menuItems.length}
 									>
-										<LocaleLink
-											className="block hover:underline"
-											onClick={() => setIsOpen(false)}
-										/>
+										<span className="mt-8 flex gap-4 uppercase">
+											<Svg
+												name="world"
+												className="relative top-1 h-8 w-8 fill-white"
+											/>
+											<LocaleLink
+												className="block hover:underline"
+												onClick={() => setIsOpen(false)}
+												isOther
+											/>
+											<LocaleLink
+												className="block hover:underline"
+												onClick={() => setIsOpen(false)}
+											/>
+										</span>
 									</TransitionChildPreset>
 								</Transition>
 							</Dialog.Panel>

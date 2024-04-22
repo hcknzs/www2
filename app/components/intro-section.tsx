@@ -7,25 +7,29 @@ import { useString } from "~/i18n";
 type IntroSectionProps = {
 	subline: ReactNode;
 	dateLocation: ReactNode;
+	isFoldSized?: boolean;
 };
 
-const p = tw`font-plex-mono text-lg leading-snug tracking-plex-mono text-black lg:text-2xl lg:leading-snug`;
+const p = tw`text-md font-plex-mono leading-snug tracking-plex-mono text-black lg:text-2xl lg:leading-snug`;
 
 export const IntroSection: React.FC<IntroSectionProps> = ({
 	dateLocation,
 	subline,
+	isFoldSized = false,
 }) => {
 	const t = useString();
 
 	return (
 		<Section
 			theme="lime"
-			className={tw`flex min-h-[90vh] flex-1`}
-			innerClassName={tw`mb-0 mt-0 flex w-full flex-col items-center justify-center gap-[10vh]`}
+			className={cn(tw`flex flex-1`, isFoldSized && tw`h-screen`)}
+			innerClassName={cn(
+				"mb-0 mt-0 flex w-full flex-col items-center justify-center gap-16 py-12 text-center lg:flex-row lg:text-left",
+			)}
 		>
 			<a
 				href="#intro"
-				className="w-32 md:w-52"
+				className={cn(isFoldSized ? "w-32 md:w-48" : "w-32")}
 				aria-label={t("scroll-to-bottom")}
 			>
 				<img

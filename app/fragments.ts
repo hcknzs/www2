@@ -55,6 +55,7 @@ export const pageContentFragment = graphql(`
 				id
 				subline
 				dateLocation
+				size
 			}
 			... on SectionNewsletterRecord {
 				id

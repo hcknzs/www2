@@ -1,6 +1,7 @@
 import { StructuredText, renderNodeRule } from "react-datocms";
 import { isStructuredText, isHeading } from "datocms-structured-text-utils";
 import { Hx } from "uberschrift";
+import { cn } from "@peerigon/pupper/tailwind";
 import { IntroSection } from "./intro-section";
 import { NewsletterSection } from "./newsletter-section";
 import { ProseWrapper, Section, isTheme } from "./section";
@@ -36,6 +37,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 								key={section.id}
 								dateLocation={section.dateLocation}
 								subline={replacePipeWithBr(section.subline)}
+								isFoldSized={section.size === "full"}
 							/>
 						);
 					case "SectionNewsletterRecord":
@@ -62,7 +64,12 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 								}
 								anchor={section.sectionSlug ?? undefined}
 							>
-								<ProseWrapper>
+								<ProseWrapper
+									className={cn(
+										section.sectionTheme === "lime" &&
+											"text-black",
+									)}
+								>
 									<StructuredText
 										customNodeRules={[hxRule]}
 										data={section.content}
