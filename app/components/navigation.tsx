@@ -94,19 +94,19 @@ export const Navigation = () => {
 									)}
 									<TransitionChildPreset
 										name="menu.item"
-										index={menuItems.length}
+										index={menuItems.length + 1}
 									>
 										<span className="mt-8 flex gap-[0.25em] uppercase">
-											<Svg
-												name="world"
-												className="relative top-[0.125em] aspect-square h-[0.75em] fill-white"
-											/>
 											<LocaleLink
 												onClick={() => setIsOpen(false)}
 												isOther
 											/>
 											<LocaleLink
 												onClick={() => setIsOpen(false)}
+											/>
+											<Svg
+												name="world"
+												className="relative top-[0.125em] aspect-square h-[0.75em] fill-white"
 											/>
 										</span>
 									</TransitionChildPreset>

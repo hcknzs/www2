@@ -13,7 +13,7 @@
 		"build:gql:schema": "./scripts/gql.sh",
 		"build:remix": "remix build",
 		"build:svg": "pupper-svg -i ./svg-masters -o ./public/sprite.svg  -c ./app/components/icons -m ./app/components/icons/svg-sprite.tsx -H /sprite.svg -P",
-		"dev": "LOCALHOST=1 run-p dev:*",
+		"dev": "CMS_INCLUDE_DRAFTS=true run-p dev:*",
 		"dev:remix": "remix dev --manual",
 		"other:patch": "patch-package",
 		"other:typecheck": "tsc",
