@@ -22,6 +22,7 @@ import { fetchFromCms } from "./utils/cms";
 import { graphql } from "./graphql";
 import { StringProvider } from "./i18n";
 import { getLocaleFromParams } from "./utils/loader-fns";
+import { GlobalNavigationStatusIndicator } from "./components/global-navigation-status-indicator";
 
 export const loader = async ({ context, params }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
@@ -72,6 +73,7 @@ const App = () => {
 					{renderMetaTags(site.faviconMetaTags)}
 				</head>
 				<body className="font-plex">
+					<GlobalNavigationStatusIndicator />
 					<Outlet />
 					<ScrollRestoration />
 					<Scripts />
