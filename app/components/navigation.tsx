@@ -6,7 +6,6 @@ import { Svg } from "./icons/svg-sprite";
 import { Loader } from "../routes/$locale.$slug";
 import { TransitionChildPreset } from "./transitions";
 import { LocaleLink } from "./locale-link";
-import { SvgWorld } from "./icons/world";
 import { useString } from "~/i18n";
 import { useScrollDepth } from "~/utils/hooks";
 
@@ -34,15 +33,16 @@ export const Navigation = () => {
 			>
 				<Svg
 					className={cn(
-						tw`mr-2 block h-8 w-8 fill-current`,
+						tw`mr-1 block h-6 w-6 fill-current md:mr-2 md:h-8 md:w-8`,
 						isOpen && tw`text-white`,
 					)}
 					name={isOpen ? "burger-close" : "burger"}
 				/>
 				<Svg
 					className={cn(
-						tw`block h-8 w-[10.625rem] fill-current transition-all`,
+						tw`block h-6 w-[8rem] fill-current transition-all md:h-8 md:w-[10.625rem]`,
 						isInIntroSection ? tw`opacity-100` : tw`opacity-0`,
+						isOpen && tw`invisible`,
 					)}
 					name="menu"
 				/>

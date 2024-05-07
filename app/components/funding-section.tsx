@@ -7,7 +7,7 @@ export const FundingSection = () => {
 
 	return (
 		<Section theme="white">
-			<div className="m-auto max-w-screen-sm">
+			<div className="m-auto flex max-w-screen-sm flex-col gap-16 py-8 lg:gap-32 lg:py-0">
 				<Hx className="sr-only">{t("funding.title")}</Hx>
 				<a
 					href="https://www.demokratie-leben.de/"
@@ -16,8 +16,25 @@ export const FundingSection = () => {
 				>
 					<img
 						src="/dl.svg"
-						alt={t("funding.alt")}
+						alt={t("funding.alt.dl")}
 						className="m-auto block"
+					/>
+				</a>
+				<a
+					href="https://www.friedensstadt-augsburg.de/"
+					target="_blank"
+					rel="noreferrer"
+					className="m-auto flex flex-col items-center justify-center gap-8 md:flex-row"
+				>
+					<img
+						src="/fa.jpg"
+						alt={t("funding.alt.fa")}
+						className="block w-full max-w-40 md:max-w-80"
+					/>
+					<img
+						src="/augsburg.svg"
+						alt=""
+						className="block w-48 md:max-w-96"
 					/>
 				</a>
 			</div>

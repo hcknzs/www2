@@ -10,8 +10,9 @@ import {
 const de = {
 	anchor: "Direktlink zu diesem Abschnitt",
 	"footer.legal": "Impressum & Datenschutz",
-	"funding.alt":
+	"funding.alt.dl":
 		"Gefördert vom: Bundesministerium für Familie, Senioren, Frauen und Jugend im Rahmen des Bundesprogramms Demokratie Leben!",
+	"funding.alt.fa": "Gefördert von: Friedensstadt Augsburg",
 	"funding.title": "Förderungen",
 	"menu.close": "Menü schließen",
 	"menu.open": "Menü öffnen",
@@ -27,8 +28,9 @@ const de = {
 const en: Record<keyof typeof de, string> = {
 	anchor: "Direct link to this section",
 	"footer.legal": "Legal & Privacy Notice",
-	"funding.alt":
+	"funding.alt.dl":
 		"Funded by: Federal Ministry for Family Affairs, Senior Citizens, Women and Youth as part of the federal program Demokratie Leben!",
+	"funding.alt.fa": "Funded by: Friedensstadt Augsburg",
 	"funding.title": "Fundings",
 	"menu.close": "Close menu",
 	"menu.open": "Open menu",
