@@ -17,7 +17,7 @@ export const FundingSection = () => {
 					<img
 						src="/dl.svg"
 						alt={t("funding.alt.dl")}
-						className="m-auto block"
+						className="m-auto block w-full max-w-[36rem]"
 					/>
 				</a>
 				<a
@@ -29,12 +29,12 @@ export const FundingSection = () => {
 					<img
 						src="/fa.jpg"
 						alt={t("funding.alt.fa")}
-						className="block w-full max-w-40 md:max-w-80"
+						className="block w-full max-w-[20rem] md:max-w-[32rem]"
 					/>
 					<img
 						src="/augsburg.svg"
 						alt=""
-						className="block w-48 md:max-w-96"
+						className="block w-full max-w-[20rem] md:max-w-[32rem]"
 					/>
 				</a>
 			</div>
