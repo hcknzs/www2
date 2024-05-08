@@ -4,7 +4,7 @@ import {
 	useResizeObserver,
 	useWindowSize,
 } from "@react-hookz/web";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useScrollY = () => {
 	const [scrollY, setScrollY] = useState(0);
@@ -19,6 +19,7 @@ const useScrollY = () => {
 	);
 
 	useEventListener(win, "scroll", debouncedCallback, { passive: true });
+	useEffect(debouncedCallback, [debouncedCallback]);
 
 	return scrollY;
 };

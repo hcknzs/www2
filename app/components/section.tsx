@@ -42,7 +42,7 @@ export const Section: React.FC<
 			id={anchor}
 			className={cn(
 				themes[theme],
-				tw`relative p-8`,
+				tw`relative flex flex-col flex-nowrap px-5 py-8`,
 				isFirst && "py-16",
 				className,
 			)}
@@ -50,7 +50,7 @@ export const Section: React.FC<
 		>
 			{anchor && (
 				<a
-					className="top-12 mb-4 block w-fit emoji-white xl:sticky xl:-ml-4 xl:mb-0"
+					className="mb-6 block w-fit emoji-white lg:sticky lg:top-4 lg:mb-0 lg:self-end"
 					aria-label={t("anchor")}
 					href={`#${anchor}`}
 				>

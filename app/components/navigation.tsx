@@ -29,11 +29,19 @@ export const Navigation = () => {
 				aria-label={t("menu.open")}
 				type="button"
 				onClick={() => setIsOpen(true)}
-				className="flex"
+				className={cn(
+					"flex cursor-pointer",
+					"relative before:absolute before:z-[-1] before:contents before:rounded-b-full before:rounded-r-full before:bg-purple before:transition-transform",
+					"before:-left-9 before:-top-9 before:size-20 before:-translate-x-10 before:-translate-y-10",
+					"before:-translate-x-14 before:-translate-y-14 md:before:-left-10 md:before:-top-10 md:before:size-24",
+
+					!isInIntroSection &&
+						"before:translate-x-0 before:translate-y-0",
+				)}
 			>
 				<Svg
 					className={cn(
-						tw`mr-1 block h-6 w-6 fill-current md:mr-2 md:h-8 md:w-8`,
+						tw`relative z-50 mr-1 block h-6 w-6 fill-current md:mr-2 md:h-8 md:w-8`,
 						isOpen && tw`text-white`,
 					)}
 					name={isOpen ? "burger-close" : "burger"}

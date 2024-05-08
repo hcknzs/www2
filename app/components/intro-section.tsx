@@ -24,7 +24,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
 			theme="lime"
 			className={cn(tw`flex flex-1`, isFoldSized && tw`h-screen`)}
 			innerClassName={cn(
-				"mb-0 mt-0 flex w-full flex-col items-center justify-center gap-16 py-12 text-center lg:flex-row lg:text-left",
+				"mb-0 mt-0 flex h-full w-full flex-col items-center justify-center gap-16 py-12 text-center lg:flex-row lg:text-left",
 			)}
 		>
 			<a
