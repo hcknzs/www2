@@ -1,6 +1,33 @@
 import { FragmentOf, graphql } from "./graphql";
 
-const pageContentFragment = graphql(`
+export const siteSettingsFragment = graphql(`
+	fragment SiteSettings on Query @_unmask {
+		settings: settingsModel(locale: $locale) {
+			navigation {
+				__typename
+
+				... on NavLinkRecord {
+					id
+					url
+					label
+				}
+				... on NavPageRecord {
+					id
+					page {
+						urlSlug
+					}
+					label
+				}
+			}
+		}
+	}
+`);
+
+export type SiteSettingsRaw = FragmentOf<
+	typeof siteSettingsFragment
+>["settings"];
+
+export const pageContentFragment = graphql(`
 	fragment PageContent on PageRecord @_unmask {
 		id
 		titleInternal
@@ -28,6 +55,7 @@ const pageContentFragment = graphql(`
 				id
 				subline
 				dateLocation
+				size
 			}
 			... on SectionNewsletterRecord {
 				id
@@ -53,33 +81,3 @@ const pageContentFragment = graphql(`
 export type SectionType = FragmentOf<
 	typeof pageContentFragment
 >["content"][number];
-
-export const getPageBySlugAndLocale = graphql(
-	`
-		query GetPageBySlugAndLocale($slug: String!, $locale: SiteLocale!) {
-			page(
-				locale: $locale
-				fallbackLocales: [de]
-				filter: { urlSlug: { eq: $slug } }
-			) {
-				...PageContent
-			}
-		}
-	`,
-	[pageContentFragment],
-);
-
-export const getPageByIdAndLocale = graphql(
-	`
-		query GetPageByIdAndLocale($id: ItemId!, $locale: SiteLocale!) {
-			page(
-				locale: $locale
-				fallbackLocales: [de]
-				filter: { id: { eq: $id } }
-			) {
-				...PageContent
-			}
-		}
-	`,
-	[pageContentFragment],
-);

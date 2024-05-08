@@ -9,17 +9,20 @@ import {
 	ScrollRestoration,
 	useLoaderData,
 } from "@remix-run/react";
+
 import "@fontsource/ibm-plex-mono/400-italic.css";
-import "@fontsource/ibm-plex-mono/700-italic.css";
-import "@fontsource/ibm-plex-mono/700.css";
+import "@fontsource/ibm-plex-mono/600-italic.css";
+import "@fontsource/ibm-plex-mono/600.css";
 import "@fontsource/ibm-plex-sans/300.css";
 import "@fontsource/ibm-plex-sans/300-italic.css";
+
 import { renderMetaTags } from "react-datocms";
 import stylesheet from "./tailwind.css";
 import { fetchFromCms } from "./utils/cms";
 import { graphql } from "./graphql";
 import { StringProvider } from "./i18n";
 import { getLocaleFromParams } from "./utils/loader-fns";
+import { GlobalNavigationStatusIndicator } from "./components/global-navigation-status-indicator";
 
 export const loader = async ({ context, params }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
@@ -70,6 +73,7 @@ const App = () => {
 					{renderMetaTags(site.faviconMetaTags)}
 				</head>
 				<body className="font-plex">
+					<GlobalNavigationStatusIndicator />
 					<Outlet />
 					<ScrollRestoration />
 					<Scripts />

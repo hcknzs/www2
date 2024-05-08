@@ -1,6 +1,6 @@
 import { useIntervalEffect } from "@react-hookz/web";
 import { useState } from "react";
-import { cn } from "../utils/tailwind.js";
+import { cn } from "@peerigon/pupper/tailwind";
 import { usePrefersReducedMotion } from "../utils/misc.js";
 
 const particles = ["#", "*/", "/*", "~", "░", "▒", "▓", "+=", "~/", "./", "/."];
@@ -45,7 +45,7 @@ export const Noise: React.FC<{
 			aria-hidden
 			className={cn(
 				className,
-				`font-plex-mono text-md lg:text-3xl absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[0] animate-strobe motion-reduce:animate-none`,
+				`text-md pointer-events-none absolute left-0 top-0 z-[0] h-full w-full animate-strobe overflow-hidden font-plex-mono motion-reduce:animate-none lg:text-3xl`,
 			)}
 		>
 			{noise.map(({ char, id, size, x, y }) => (

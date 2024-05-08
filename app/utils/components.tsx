@@ -1,6 +1,6 @@
 // A "Simple Layout Component" ™️ is a React.FC with children and classNames
 
-import { cn } from "./tailwind";
+import { cn } from "@peerigon/pupper/tailwind";
 
 type SLC<P = object> = React.FC<
 	{

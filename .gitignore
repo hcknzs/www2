@@ -8,3 +8,6 @@ node_modules
 .DS_Store
 schema.graphql
 app/graphql-env.d.ts
+public/sprite.svg
+app/components/icons/*
+!app/components/icons/.gitkeep

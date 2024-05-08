@@ -3,23 +3,33 @@
 	"private": true,
 	"sideEffects": false,
 	"type": "module",
+	"scriptlint": {
+		"ignoreScripts": [
+			"build:gql:schema"
+		]
+	},
 	"scripts": {
-		"build": "run-s build:*",
-		"build:gql:schema": "source .vercel/.env.development.local && node ./node_modules/.bin/gql-tada generate-schema $CMS_ENDPOINT --header \"authorization: Bearer $CMS_API_TOKEN_READONLY\" --header \"X-Exclude-Invalid: true\"",
+		"build": "run-s build:gql:schema build:svg build:remix",
+		"build:gql:schema": "./scripts/gql.sh",
 		"build:remix": "remix build",
-		"dev": "run-p dev:*",
+		"build:svg": "pupper-svg -i ./svg-masters -o ./public/sprite.svg  -c ./app/components/icons -m ./app/components/icons/svg-sprite.tsx -H /sprite.svg -P",
+		"dev": "CMS_INCLUDE_DRAFTS=true run-p dev:*",
 		"dev:remix": "remix dev --manual",
-		"postinstall": "patch-package",
+		"other:patch": "patch-package",
+		"other:typecheck": "tsc",
+		"postinstall": "run-s other:patch build:gql:schema build:svg",
+		"start": "remix-serve ./build/index.js",
 		"test": "run-p test:*",
 		"test:knip": "knip --exclude dependencies,unlisted",
 		"test:lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-		"test:types": "tsc --noEmit",
-		"start": "remix-serve ./build/index.js",
-		"typecheck": "tsc"
+		"test:scripts": "scriptlint --strict --fix",
+		"test:types": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@fontsource/ibm-plex-mono": "^5.0.12",
 		"@fontsource/ibm-plex-sans": "^5.0.19",
+		"@headlessui/react": "^1.7.19",
+		"@peerigon/pupper": "^1.1.0",
 		"@react-hookz/web": "^24.0.4",
 		"@remix-run/css-bundle": "^2.8.1",
 		"@remix-run/node": "^2.8.1",
@@ -57,6 +67,7 @@
 		"postcss": "^8.4.38",
 		"prettier": "^3.2.5",
 		"prettier-plugin-tailwindcss": "^0.5.14",
+		"scriptlint": "^3.0.0",
 		"tailwindcss": "^3.4.3",
 		"typescript": "^5.4.5"
 	},
