@@ -12,9 +12,6 @@ export const env = createEnv({
 		BREVO_API_URL: z.string().url(),
 		CMS_API_TOKEN_READONLY: z.string().min(1),
 		CMS_ENDPOINT: z.string().url(),
-		CMS_INCLUDE_DRAFTS: z
-			.literal("true")
-			.optional()
-			.refine((value) => value === "true"),
+		CMS_INCLUDE_DRAFTS: z.string().optional(),
 	},
 });
