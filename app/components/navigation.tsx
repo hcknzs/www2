@@ -67,7 +67,7 @@ export const Navigation = () => {
 									appear
 									show={isOpen}
 									as="div"
-									className={`flex min-w-[50vw] flex-col gap-[0.25em] text-left ${font}`}
+									className={`flex min-w-[50vw] flex-col items-start gap-[0.25em] text-left ${font}`}
 								>
 									{menuItems.map(
 										(
