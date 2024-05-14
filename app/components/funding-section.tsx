@@ -27,6 +27,11 @@ export const FundingSection = () => {
 					className="m-auto flex flex-col items-center justify-center gap-8 md:flex-row"
 				>
 					<img
+						src="/ff.svg"
+						alt=""
+						className="block w-full max-w-[15rem] md:max-w-[24rem]"
+					/>
+					<img
 						src="/fa.jpg"
 						alt={t("funding.alt.fa")}
 						className="block w-full max-w-[20rem] md:max-w-[32rem]"
