@@ -7,7 +7,7 @@ export const FundingSection = () => {
 
 	return (
 		<Section theme="white">
-			<div className="m-auto flex max-w-screen-sm flex-col gap-16 py-8 lg:gap-32 lg:py-0">
+			<div className="m-auto flex max-w-screen-md flex-col gap-16 py-8 lg:gap-32 lg:py-0">
 				<Hx className="sr-only">{t("funding.title")}</Hx>
 				<a
 					href="https://www.demokratie-leben.de/"
@@ -24,17 +24,22 @@ export const FundingSection = () => {
 					href="https://www.friedensstadt-augsburg.de/"
 					target="_blank"
 					rel="noreferrer"
-					className="m-auto flex flex-col items-center justify-center gap-8 md:flex-row"
+					className="flex flex-col items-center justify-center gap-12 md:flex-row md:gap-4"
 				>
+					<img
+						src="/ff.svg"
+						alt=""
+						className="max-w-[66%] sm:max-w-[50%] md:max-w-[29%]"
+					/>
 					<img
 						src="/fa.jpg"
 						alt={t("funding.alt.fa")}
-						className="block w-full max-w-[20rem] md:max-w-[32rem]"
+						className="max-w-[66%] sm:max-w-[50%] md:max-w-[32%]"
 					/>
 					<img
 						src="/augsburg.svg"
 						alt=""
-						className="block w-full max-w-[20rem] md:max-w-[32rem]"
+						className="max-w-[66%] sm:max-w-[50%] md:max-w-[39%]"
 					/>
 				</a>
 			</div>
