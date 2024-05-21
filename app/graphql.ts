@@ -10,6 +10,7 @@ export const graphql = initGraphQLTada<{
 		FloatType: number;
 		BooleanType: boolean;
 		JSON: unknown;
+		DateTime: string;
 	};
 }>();
 

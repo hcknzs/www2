@@ -1,4 +1,5 @@
 import { responsiveImageFragment } from "./components/cms-image";
+import { countdownFragment } from "./components/countdown";
 import { osMapFragment } from "./components/os-map";
 import { ResultOf, graphql } from "~/graphql";
 
@@ -79,6 +80,7 @@ export const pageContentFragment = graphql(
 					content {
 						blocks {
 							...Map
+							...Countdown
 						}
 						links
 						value
@@ -87,7 +89,7 @@ export const pageContentFragment = graphql(
 			}
 		}
 	`,
-	[responsiveImageFragment, osMapFragment],
+	[responsiveImageFragment, osMapFragment, countdownFragment],
 );
 export type SectionType = ResultOf<
 	typeof pageContentFragment
