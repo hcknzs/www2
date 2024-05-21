@@ -18,13 +18,13 @@ const presets = {
 
 	"menu.item": (index) => {
 		const delayClasses = [
-			"delay-100",
-			"delay-200",
-			"delay-300",
-			"delay-400",
-			"delay-500",
-			"delay-600",
-			"delay-700",
+			"delay-[100ms]",
+			"delay-[200ms]",
+			"delay-[300ms]",
+			"delay-[400ms]",
+			"delay-[500ms]",
+			"delay-[600ms]",
+			"delay-[700ms]",
 		];
 
 		const thisDelay =
