@@ -20,16 +20,16 @@
 		"postinstall": "run-s other:patch build:gql:schema build:svg",
 		"start": "remix-serve ./build/index.js",
 		"test": "run-p test:*",
-		"test:knip": "knip --exclude dependencies,unlisted",
 		"test:lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
 		"test:scripts": "scriptlint --strict --fix",
+		"test:tsue": "pupper-tsue",
 		"test:types": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@fontsource/ibm-plex-mono": "^5.0.12",
 		"@fontsource/ibm-plex-sans": "^5.0.19",
 		"@headlessui/react": "^1.7.19",
-		"@peerigon/pupper": "^1.1.0",
+		"@peerigon/pupper": "^1.2.1",
 		"@react-hookz/web": "^24.0.4",
 		"@remix-run/css-bundle": "^2.8.1",
 		"@remix-run/node": "^2.8.1",

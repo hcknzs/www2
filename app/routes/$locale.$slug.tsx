@@ -19,7 +19,7 @@ import { Locale, StringProvider, useString } from "~/i18n";
 import { FundingSection } from "~/components/funding-section";
 import { Navigation } from "~/components/navigation";
 import { normalizeSiteSettings } from "~/utils/normalize";
-import { graphql } from "~/graphql";
+import { graphql, readFragment } from "~/graphql";
 
 const resolveReferencePageSections = async (
 	sections: Array<SectionType>,
@@ -34,7 +34,7 @@ const resolveReferencePageSections = async (
 		if (section.__typename === "ReferencePageSectionCollectionRecord") {
 			const pageId = section.page.id;
 
-			const { page } = await fetchFromCms({
+			const { page: pageRaw } = await fetchFromCms({
 				query: graphql(
 					`
 						query GetPageByIdAndLocale(
@@ -54,6 +54,8 @@ const resolveReferencePageSections = async (
 				),
 				variables: { id: pageId, locale },
 			});
+
+			const page = readFragment(pageContentFragment, pageRaw);
 
 			if (!page) {
 				return [];
@@ -78,34 +80,44 @@ export const loader = async ({ params, context }: LoaderFunctionArgs) => {
 	const locale = getLocaleFromParams(params);
 	const slug = params.slug ?? "index";
 
-	const { page, settings } = await fetchFromCms({
-		query: graphql(
-			`
-				query GetPageBySlugAndLocale(
-					$slug: String!
-					$locale: SiteLocale!
-				) {
+	const query = graphql(
+		`
+			query GetPageBySlugAndLocale($slug: String!, $locale: SiteLocale!) {
+				settings: settingsModel(locale: $locale) {
 					...SiteSettings
-					page(
-						locale: $locale
-						fallbackLocales: [de]
-						filter: { urlSlug: { eq: $slug } }
-					) {
-						...PageContent
-					}
 				}
-			`,
-			[pageContentFragment, siteSettingsFragment],
-		),
+				page(
+					locale: $locale
+					fallbackLocales: [de]
+					filter: { urlSlug: { eq: $slug } }
+				) {
+					...PageContent
+				}
+			}
+		`,
+		[pageContentFragment, siteSettingsFragment],
+	);
+
+	const fetched = await fetchFromCms({
+		query,
 		variables: { locale, slug },
 	});
 
-	if (!page) {
+	if (!fetched.page) {
 		throw new Response(null, {
 			status: 404,
 			statusText: "Not Found",
 		});
 	}
+
+	if (!fetched.settings) {
+		throw new Response(null, {
+			status: 500,
+			statusText: "Page settings not found, that's weird…",
+		});
+	}
+	const page = readFragment(pageContentFragment, fetched.page);
+	const settings = readFragment(siteSettingsFragment, fetched.settings);
 
 	const content = await resolveReferencePageSections(page.content, locale);
 

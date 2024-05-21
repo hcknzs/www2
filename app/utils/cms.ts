@@ -1,5 +1,6 @@
 import type { DocumentNode } from "graphql";
 import { print } from "graphql";
+import { z } from "zod";
 import { env } from "~/env";
 import { ResultOf, VariablesOf } from "~/graphql";
 
@@ -48,6 +49,28 @@ export const fetchFromCms = async <Q extends DocumentNode>({
 		);
 	}
 
-	const { data } = (await response.json()) as { data: ResultOf<Q> };
-	return data;
+	const json = await response.json();
+
+	const { errors, data } = z
+		.object({
+			data: z.unknown(),
+			errors: z
+				.array(
+					z.object({
+						message: z.string(),
+					}),
+				)
+				.optional(),
+		})
+		.parse(json);
+
+	if (errors) {
+		throw new Error(
+			`Failed to fetch data from CMS: ${errors
+				.map((error) => error.message)
+				.join(", ")}`,
+		);
+	}
+
+	return data as ResultOf<Q>;
 };

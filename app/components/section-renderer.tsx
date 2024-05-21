@@ -7,6 +7,7 @@ import { NewsletterSection } from "./newsletter-section";
 import { ProseWrapper, Section, isTheme } from "./section";
 import { FundingSection } from "./funding-section";
 import { Noise } from "./noise";
+import { HeaderImage } from "./header-image";
 import { replacePipeWithBr } from "~/i18n";
 import type { SectionType } from "~/fragments";
 
@@ -49,6 +50,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 								instagramLinkText={section.instagramLinkText}
 							/>
 						);
+					case "SectionHeaderImageRecord":
+						return <HeaderImage key={section.id} {...section} />;
 					case "SectionTextRecord": {
 						if (!isStructuredText(section.content)) {
 							return null;

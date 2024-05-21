@@ -8,7 +8,7 @@ const themes = {
 	black: tw`bg-black text-white`,
 	disrupt: tw`text-md bg-black text-center font-plex-mono tracking-plex-mono text-white lg:text-xl`,
 	lime: tw`bg-lime text-black`,
-	purple: tw`bg-purple-400 text-black`,
+	purple: tw`bg-purple-400 text-white`,
 	red: tw`bg-red text-black`,
 	teal: tw`bg-teal-300 text-white`,
 	white: tw`bg-white text-black`,
@@ -16,6 +16,9 @@ const themes = {
 
 export const isTheme = (color: string): color is keyof typeof themes =>
 	color in themes;
+
+export const getTheme = (name: string) =>
+	isTheme(name) ? themes[name] : themes.red;
 
 export const Section: React.FC<
 	ComponentProps<"div"> & {
