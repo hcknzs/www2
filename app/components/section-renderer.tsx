@@ -74,6 +74,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 									<StructuredText
 										customNodeRules={[hxRule]}
 										data={section.content}
+										renderBlock={({ record }) => null}
 									/>
 								</ProseWrapper>
 								{section.noise && <Noise />}

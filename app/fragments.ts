@@ -69,7 +69,10 @@ export const pageContentFragment = graphql(`
 				sectionTheme
 				noise
 				content {
-					blocks
+					blocks {
+						__typename
+						id
+					}
 					links
 					value
 				}
