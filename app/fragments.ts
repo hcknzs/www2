@@ -71,7 +71,6 @@ export const pageContentFragment = graphql(`
 				content {
 					blocks {
 						__typename
-						id
 					}
 					links
 					value
