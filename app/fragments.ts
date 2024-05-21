@@ -1,29 +1,6 @@
+import { responsiveImageFragment } from "./components/cms-image";
+import { osMapFragment } from "./components/os-map";
 import { ResultOf, graphql } from "~/graphql";
-
-const responsiveImageFragment = graphql(`
-	fragment ResponsiveImage on FileFieldInterface @_unmask {
-		responsiveImage(imgixParams: { w: 600, auto: format }) {
-			# always required
-			src
-			srcSet
-			width
-			height
-
-			# not required, but strongly suggested!
-			alt
-			title
-
-			# blur-up placeholder, JPEG format, base64-encoded, or...
-			base64
-			# background color placeholder
-			bgColor
-
-			sizes
-		}
-	}
-`);
-
-export type ResponsiveImageType = ResultOf<typeof responsiveImageFragment>;
 
 export const siteSettingsFragment = graphql(`
 	fragment SiteSettings on SettingsModelRecord {
@@ -71,10 +48,12 @@ export const pageContentFragment = graphql(
 					id
 				}
 
-				... on SectionHeaderImageRecord {
+				... on SectionImageHeaderRecord {
 					id
 					text
-					theme
+					color {
+						hex
+					}
 					image {
 						...ResponsiveImage
 					}
@@ -98,7 +77,9 @@ export const pageContentFragment = graphql(
 					sectionTheme
 					noise
 					content {
-						blocks
+						blocks {
+							...Map
+						}
 						links
 						value
 					}
@@ -106,7 +87,7 @@ export const pageContentFragment = graphql(
 			}
 		}
 	`,
-	[responsiveImageFragment],
+	[responsiveImageFragment, osMapFragment],
 );
 export type SectionType = ResultOf<
 	typeof pageContentFragment

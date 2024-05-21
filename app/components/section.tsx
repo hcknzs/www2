@@ -17,9 +17,6 @@ const themes = {
 export const isTheme = (color: string): color is keyof typeof themes =>
 	color in themes;
 
-export const getTheme = (name: string) =>
-	isTheme(name) ? themes[name] : themes.red;
-
 export const Section: React.FC<
 	ComponentProps<"div"> & {
 		anchor?: string;

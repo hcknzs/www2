@@ -7,6 +7,7 @@ export const graphql = initGraphQLTada<{
 	scalars: {
 		ItemId: string;
 		IntType: number;
+		FloatType: number;
 		BooleanType: boolean;
 		JSON: unknown;
 	};

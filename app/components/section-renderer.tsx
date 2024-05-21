@@ -8,6 +8,7 @@ import { ProseWrapper, Section, isTheme } from "./section";
 import { FundingSection } from "./funding-section";
 import { Noise } from "./noise";
 import { HeaderImage } from "./header-image";
+import { renderBlock } from "./block-renderer";
 import { replacePipeWithBr } from "~/i18n";
 import type { SectionType } from "~/fragments";
 
@@ -50,7 +51,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 								instagramLinkText={section.instagramLinkText}
 							/>
 						);
-					case "SectionHeaderImageRecord":
+					case "SectionImageHeaderRecord":
 						return <HeaderImage key={section.id} {...section} />;
 					case "SectionTextRecord": {
 						if (!isStructuredText(section.content)) {
@@ -77,6 +78,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 									<StructuredText
 										customNodeRules={[hxRule]}
 										data={section.content}
+										renderBlock={renderBlock}
 									/>
 								</ProseWrapper>
 								{section.noise && <Noise />}
