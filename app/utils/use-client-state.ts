@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 
-export const useClientState = <T>(initialValue: T, delay = 1) => {
+export const useClientState = <T = undefined>(initialValue: T | (() => T)) => {
 	const [value, setValue] = useState<T | undefined>(undefined);
 
-	useEffect(() => setValue(initialValue), [initialValue]);
+	useEffect(() => {
+		if (initialValue instanceof Function) {
+			setValue(initialValue());
+			return;
+		}
 
-	return [value, setValue];
+		setValue(initialValue);
+	}, [initialValue]);
+
+	return [value, setValue] as const;
 };
