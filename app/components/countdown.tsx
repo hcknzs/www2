@@ -26,9 +26,7 @@ export const Countdown: React.FC<ResultOf<typeof countdownFragment>> = ({
 			seconds: Math.floor((seconds % (1000 * 60)) / 1000),
 		};
 
-		return JSON.stringify(ddhhmmss, null, 2)
-			.replace(/\n/g, "")
-			.replace(/ {2}/g, " ");
+		return JSON.stringify(ddhhmmss, null, 2);
 	};
 
 	const [diff, setDiff] = useState(getDiff);
