@@ -1,5 +1,9 @@
 import { StructuredText, renderNodeRule } from "react-datocms";
-import { isStructuredText, isHeading } from "datocms-structured-text-utils";
+import {
+	isStructuredText,
+	isHeading,
+	isLink,
+} from "datocms-structured-text-utils";
 import { Hx } from "uberschrift";
 import { cn } from "@peerigon/pupper/tailwind";
 import { IntroSection } from "./intro-section";
@@ -21,6 +25,27 @@ const hxRule = renderNodeRule(isHeading, ({ node, children, key }) => {
 		<Hx increment={Math.max(0, node.level - 1)} key={key}>
 			{children}
 		</Hx>
+	);
+});
+
+const linkRule = renderNodeRule(isLink, ({ node, children, key }) => {
+	const metaType = node.meta?.find((m) => m.id === "type")?.value;
+	const target = node.meta?.find((m) => m.id === "target")?.value;
+
+	const isButton = metaType === "button";
+
+	return (
+		<a
+			href={node.url}
+			target={target}
+			key={key}
+			className={cn(
+				isButton &&
+					"inline-flex h-12 rounded-full border border-purple-400 bg-purple-400 px-5 py-1 font-plex-mono tracking-plex-mono !text-white !no-underline transition-colors hover:bg-purple-500 sm:min-w-[10rem]",
+			)}
+		>
+			{children}
+		</a>
 	);
 });
 
@@ -76,7 +101,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 									)}
 								>
 									<StructuredText
-										customNodeRules={[hxRule]}
+										customNodeRules={[hxRule, linkRule]}
 										data={section.content}
 										renderBlock={renderBlock}
 									/>
