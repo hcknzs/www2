@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-literals */
 import { Hx } from "uberschrift";
 import { Section } from "./section";
 import { useString } from "~/i18n";
@@ -7,7 +8,7 @@ export const FundingSection = () => {
 
 	return (
 		<Section theme="white">
-			<div className="m-auto flex max-w-screen-md flex-col gap-16 py-8 lg:gap-32 lg:py-0">
+			<div className="m-auto flex max-w-screen-md flex-col gap-16 py-8 lg:py-0">
 				<Hx className="sr-only">{t("funding.title")}</Hx>
 				<a
 					href="https://www.demokratie-leben.de/"
@@ -20,6 +21,13 @@ export const FundingSection = () => {
 						className="m-auto block w-full max-w-[36rem]"
 					/>
 				</a>
+				<p className="text-center text-sm text-gray-500">
+					Die Veröffentlichung stellt keine Meinungsäußerung des
+					BMFSFJ oder des BAFzA dar.
+					<br />
+					Für inhaltliche Aussagen tragen die Autorinnen und Autoren
+					die Verantwortung.
+				</p>
 				<a
 					href="https://www.friedensstadt-augsburg.de/"
 					target="_blank"
