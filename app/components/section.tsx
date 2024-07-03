@@ -4,7 +4,7 @@ import { useString } from "~/i18n";
 import { prose } from "~/styles";
 import { slc } from "~/utils/components";
 
-const themes = {
+export const themes = {
 	black: tw`bg-black text-white`,
 	disrupt: tw`text-md bg-black text-center font-plex-mono tracking-plex-mono text-white lg:text-xl`,
 	lime: tw`bg-lime text-black`,
@@ -13,6 +13,13 @@ const themes = {
 	teal: tw`bg-teal-300 text-white`,
 	white: tw`bg-white text-black`,
 };
+
+export const colorThemeKeys = [
+	"lime",
+	"purple",
+	"red",
+	"teal",
+] as const satisfies Array<keyof typeof themes>;
 
 export const isTheme = (color: string): color is keyof typeof themes =>
 	color in themes;

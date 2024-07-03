@@ -49,6 +49,34 @@ export const pageContentFragment = graphql(
 					id
 				}
 
+				... on SectionProjectOverviewRecord {
+					id
+					projects {
+						image {
+							data: responsiveImage(
+								imgixParams: { w: 800, auto: format }
+							) {
+								# always required
+								src
+								srcSet
+								width
+								height
+
+								# not required, but strongly suggested!
+								alt
+								title
+
+								# blur-up placeholder, JPEG format, base64-encoded, or...
+								base64
+
+								sizes
+							}
+						}
+						teamName
+						description
+					}
+				}
+
 				... on SectionImageHeaderRecord {
 					id
 					text

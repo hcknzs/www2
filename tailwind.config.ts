@@ -114,6 +114,9 @@ export default {
 			letterSpacing: {
 				"plex-mono": "-0.0125em",
 			},
+			screens: {
+				"3xl": "1920px",
+			},
 		},
 	},
 } satisfies Config;
