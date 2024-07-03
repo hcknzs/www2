@@ -13,6 +13,7 @@ import { FundingSection } from "./funding-section";
 import { Noise } from "./noise";
 import { ImageHeader } from "./image-header";
 import { renderBlock } from "./block-renderer";
+import { ProjectsSection } from "./projects-section";
 import { replacePipeWithBr } from "~/i18n";
 import type { SectionType } from "~/fragments";
 
@@ -110,6 +111,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 							</Section>
 						);
 					}
+					case "SectionProjectOverviewRecord":
+						return <ProjectsSection projects={section.projects} />;
 					default:
 						return null;
 				}
