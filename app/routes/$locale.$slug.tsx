@@ -187,7 +187,7 @@ const PageComponent = () => {
 								<img
 									src="/bsp.svg"
 									alt="Bluespots productions logo"
-									className="m-auto block h-auto w-48"
+									className="m-auto mt-10 block h-auto w-48"
 								/>
 							</a>
 						</ProseWrapper>
