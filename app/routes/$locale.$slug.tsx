@@ -180,9 +180,15 @@ const PageComponent = () => {
 								href="https://bluespotsproductions.de/impressum"
 								target="_blank"
 								rel="noreferrer"
-								className="font-plex-mono tracking-plex-mono !text-black"
+								className="block text-center font-plex-mono tracking-plex-mono !text-black"
 							>
 								{t("footer.legal")}
+
+								<img
+									src="/bsp.svg"
+									alt="Bluespots productions logo"
+									className="m-auto block h-auto w-48"
+								/>
 							</a>
 						</ProseWrapper>
 					</footer>
