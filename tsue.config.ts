@@ -1,4 +1,4 @@
-import { TsueConfig } from "@peerigon/pupper";
+import { TsueConfig } from "@peerigon/pupper/tsue";
 
 export default {
 	// ignore these entirely:

@@ -2,10 +2,10 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useLoaderData, Link } from "@remix-run/react";
 import { cn, tw } from "@peerigon/pupper/tailwind";
-import { Svg } from "./icons/svg-sprite";
 import { Loader } from "../routes/$locale.$slug";
 import { TransitionChildPreset } from "./transitions";
 import { LocaleLink } from "./locale-link";
+import { Svg } from "./icons/svg";
 import { useString } from "~/i18n";
 import { useScrollDepth } from "~/utils/hooks";
 
