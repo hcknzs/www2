@@ -16,6 +16,7 @@ import { renderBlock } from "./block-renderer";
 import { ProjectsSection } from "./projects-section";
 import { replacePipeWithBr } from "~/i18n";
 import type { SectionType } from "~/fragments";
+import { YoutubeSection } from "./youtube-section";
 
 type SectionRendererProps = {
 	sections: Array<SectionType>;
@@ -79,6 +80,16 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
 						);
 					case "SectionImageHeaderRecord":
 						return <ImageHeader key={section.id} {...section} />;
+					case "SectionYoutubeRecord": {
+						console.log(section);
+						return (
+							<YoutubeSection
+								key={section.id}
+								id={section.url.providerUid}
+								poster={section.poster}
+							/>
+						);
+					}
 					case "SectionTextRecord": {
 						if (!isStructuredText(section.content)) {
 							return null;

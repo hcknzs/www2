@@ -94,12 +94,42 @@ export const pageContentFragment = graphql(
 					dateLocation
 					size
 				}
+
+				... on SectionYoutubeRecord {
+					id
+					poster {
+						data: responsiveImage(
+							imgixParams: { w: 1280, auto: format }
+						) {
+							# always required
+							src
+							srcSet
+							width
+							height
+
+							# not required, but strongly suggested!
+							alt
+							title
+
+							# blur-up placeholder, JPEG format, base64-encoded, or...
+							base64
+
+							sizes
+						}
+					}
+					url {
+						provider
+						providerUid
+					}
+				}
+
 				... on SectionNewsletterRecord {
 					id
 					instagramLinkText
 					title
 					subline
 				}
+
 				... on SectionTextRecord {
 					id
 					sectionSlug

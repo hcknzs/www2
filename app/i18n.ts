@@ -24,6 +24,7 @@ const de = {
 	"scroll-to-bottom": "Nach unten scrollen",
 	send: "Absenden",
 	"switch-language": "Switch language: Deutsch",
+	"youtube.consent": "",
 } as const;
 
 const en: Record<keyof typeof de, string> = {
